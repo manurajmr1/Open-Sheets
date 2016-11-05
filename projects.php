@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 include('config.php');
 
@@ -17,9 +18,7 @@ while($row = mysql_fetch_assoc($query)){
 }
 	
 ?>
-<!DOCTYPE html>
 <html>
-
 <head>
 
 	<meta charset="utf-8">
@@ -66,7 +65,7 @@ while($row = mysql_fetch_assoc($query)){
 					<span style="margin-left:30px;"><b>Today</b></span>
 					<?php foreach($projects['today'] as $project){?>
 					<div class="projects-div">
-					<a href="project_sheets.php" class="projects"><?php echo $project['project_name'];?></a>
+					<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><?php echo $project['project_name'];?></a>
 					</div>
 					<?php }?>
 				<?php }?>
@@ -76,15 +75,14 @@ while($row = mysql_fetch_assoc($query)){
 					<?php }?>
 					<?php foreach($projects['earlier'] as $project){?>
 					<div class="projects-div">
-					<a href="project_sheets.php" class="projects"><?php echo $project['project_name'];?></a>
+					<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><?php echo $project['project_name'];?></a>
 					</div>
 					<?php }?>		
 
 				<?php }?>
 			<?php }else{ ?>
 				<div style="text-align:center">No Projects.</div>
-			<?php }?>
-		
+			<?php }?>	
 
 		</div>
 
