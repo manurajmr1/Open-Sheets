@@ -105,6 +105,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
             }
             .usertext{
               padding:5px;
+              float:left
             }
 
         </style>
@@ -118,8 +119,13 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
+      <div>
+      
       <a class="header-title">Fingent Sheets</a>
       <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+      
+      
+          </div>
     </header>
         <div class="wrapper">
             <div class="wrapper-row">
@@ -128,10 +134,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
+                                    <div style="overflow: auto;padding:5px;">
                                     <div class="usertext">
-                                    Project Name : <input type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
-                                    Sheet Name : <input type="text" name="sheet_name" id="sheet_name" value="">
+                                    Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
+                                    Sheet Name : <input  type="text" name="sheet_name" id="sheet_name" value="">
                                     </div>
+                                    <div style="float:right">
+                                        <input type="button" value="Share 1" class="btn-info btn-md">
+                                </div></div>
                                     <!-- <p>
                                         <button id="load" name="load">
                                             Load
