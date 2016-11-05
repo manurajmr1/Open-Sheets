@@ -122,14 +122,13 @@ function ajax(url, method, params, callback) {
         
         var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
         $.ajax({
-              url: db_functions.php,
+              url: "save_sheet.php",
               type: 'post',
-              data: 'data='+data_sample ,
+              data: 'sheet_id=1&data='+data_sample ,
               success: function (result) {
 
-
               }
-          });
+        });
       }
     });
   }
