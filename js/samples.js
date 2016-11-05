@@ -119,7 +119,17 @@ function ajax(url, method, params, callback) {
         var name = element.getAttribute('data-dump');
         var instance = element.getAttribute('data-instance');
         var hot = window[instance];
-        console.log('data of ' + name, hot.getData());
+        
+        var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
+        $.ajax({
+              url: db_functions.php,
+              type: 'post',
+              data: 'data='+data_sample ,
+              success: function (result) {
+
+
+              }
+          });
       }
     });
   }
