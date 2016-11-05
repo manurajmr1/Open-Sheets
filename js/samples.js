@@ -169,7 +169,7 @@ function ajax(url, method, params, callback) {
         $.ajax({
               url: "actions.php",
               type: 'post',
-              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet&json_data='+jdata ,
+              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet&data_text='+jdata ,
               success: function (result) {
 
               }

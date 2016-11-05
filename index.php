@@ -129,8 +129,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
                                     <div class="usertext">
-                                    Project Name : <input type="text" name="project_name" value="Wesdasdas"><br>
-                                    Sheet Name : <input type="text" name="sheet_name" value="Wesdasdas">
+                                    Project Name : <input type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
+                                    Sheet Name : <input type="text" name="sheet_name" id="sheet_name" value="">
                                     </div>
                                     <!-- <p>
                                         <button id="load" name="load">
@@ -391,6 +391,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 var socket = "";
                                 var roomId = "";
                                 var valz = "";
+                                var sheetsArray = [];
+                                var project_id = "";
                                 $(document).ready(function () {
 /*
                                     socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
@@ -450,20 +452,22 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
 
                                     }
-                                    var project_id = '<?php echo $project_id; ?>';
+                                    project_id = '<?php echo $project_id; ?>';
                                     $.ajax({
                                         url: "actions.php",
                                         type: 'post',
                                         data: 'project_id=' + project_id + '&action=get_sheets',
                                         success: function (result) {
                                             var sheetData = $.parseJSON(result);
+                                            sheetsArray  =  sheetData;
                                             var sheetTabString = '';
                                             $.each(sheetData, function (key, value) {
                                                 sheetClass = '';
                                                 if (key == 0) {
                                                     sheetClass = ' class="active "';
+                                                    $("#sheet_name").val(value.sheet_name);
                                                 }
-                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a href="" data-toggle="tab">' + value.sheet_name + '</a></li>';
+                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');">' + value.sheet_name + '</a></li>';
                                             });
                                             sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
                                             $("#sheetlist").html(sheetTabString);
@@ -472,6 +476,30 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     });
 
                                 });
+
+    function changeSheet(sheet_id){
+        $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
+              success: function (result) {
+
+              }
+        });
+    }
+
+    function changeProjectName(){
+      var project_name = $("#project_name").val();
+
+        $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&project_name='+project_name+'&action=save_project_name',
+              success: function (result) {
+
+              }
+        });
+    }
     </script>
 </body>
 </html>
