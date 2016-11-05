@@ -118,8 +118,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
-      <a class="header-title">Fingent Sheets</a>
-      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+      <a class="header-title" href="projects.php" style="text-decoration:none">Fingent Sheets</a>
+      <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
     </header>
         <div class="wrapper">
             <div class="wrapper-row">
@@ -453,6 +453,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     }
                                     project_id = '<?php echo $project_id; ?>';
+                                    getProjectDetails(project_id);
                                     $.ajax({
                                         url: "actions.php",
                                         type: 'post',
@@ -478,11 +479,21 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 });
 
     function changeSheet(sheet_id){
+
+        $("#sheetlist").find("li").removeClass('active');
+        $("#"+sheet_id).addClass('active');
+
         $.ajax({
               url: "actions.php",
               type: 'post',
               data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
               success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);console.log(resultData);
+                  var sheet_name = resultData['sheet_name'];  console.log(sheet_name);
+                  $("#sheet_name").val(sheet_name);
+                }
+                
 
               }
         });
@@ -496,6 +507,23 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               type: 'post',
               data: 'project_id='+project_id+'&project_name='+project_name+'&action=save_project_name',
               success: function (result) {
+
+              }
+        });
+    }
+
+    function getProjectDetails(project_id){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=get_project_details',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var project_name = resultData['project_name']; 
+                  $("#project_name").val(project_name);
+                }
+                
 
               }
         });
