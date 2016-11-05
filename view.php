@@ -106,13 +106,15 @@ var socket ="";var roomId ="";
                                     </input>
                                 </div>
                             </div>
+                            <input type="textfield" id="dev_total" value="0" style="display: none" />
+                             <input type="textfield" id="design_total" value="0" style="display: none" />
+                             <input type="textfield" id="testing_total" value="0" style="display: none" />
+                              <input type="textfield" id="ba_total" value="0" style="display: none" />
+                              <input type="textfield" id="total" value="0" style="display: none" />
+                              <input type="textfield" id="buffered" value="0" style="display: none" />
 <script data-jsfiddle="example1">
-var data1 =  [
-              ["login", 10, 15, 14, 13,"11","=C2/B2","22","33"],
-              ["feature1", 10, 11, 12, 13,"11","=C2/B2","22","33"],
-              ["feature2", 20, 11, 14, 13,"11","=C2/B2","22","33"],
-              ["feature3", 30, 15, 12, 13,"11","=C2/B2","22","33"]
-              ];
+
+  var data1 = [{Features:"login", price: 25, Notes: "login to", Code_and_Unit_Testing: 10, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:50,Effort:20},{Features:"feature1", price: 74.99, Notes: "feature1 note", Code_and_Unit_Testing:11, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:30,Effort:15}];
 
 var $ = function(id) {
         return document.getElementById(id);
@@ -125,9 +127,29 @@ var $ = function(id) {
     autosaveNotification,
     hot;
     function update_last_row(){
-
-      console.log(data1.length);
+        console.log(data1.length);
     }
+    function isNumber(input) {
+                return (input - 0) == input
+                    && ('' + input).replace(/^\s+|\s+$/g,
+                        "").length > 0;
+              }
+    function setTotalValue(curRow, curVal,text_id){
+                var sum;
+                var eleCellTotal = document.getElementById(text_id);
+                if(curRow == 0){
+                  eleCellTotal.value = "0";
+                  sum = parseFloat("0");
+                  eleCellTotal.value = "" + sum;
+                } else {
+                  sum = parseFloat(document.getElementById(text_id).value);
+                }
+                if(!isNumber(curVal)){
+                  return;
+                }
+                sum = sum + parseFloat(curVal);
+                eleCellTotal.value = "" + sum;
+              }
     function isEmptyRow(instance, row) {
     var rowData = instance.getData()[row];
 
@@ -162,6 +184,172 @@ var $ = function(id) {
                    formulas: true,
                    colHeaders: ['Features', 'Notes', 'Code and Unit Testing', 'Design','Testing and Debugging',
 'BA','Total','Buffered','Effort'],
+
+                    columns : [
+                            {
+                              data : 'Features',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+                                  td.style.fontWeight = 'bold';
+                                  td.style.textAlign = 'right';
+                                  td.innerText = 'Total: ';
+                                  return;
+                                } else {
+                                  Handsontable.renderers.TextRenderer
+                                      .apply(
+                                          this,
+                                          arguments);
+                                }
+                              }
+                            },
+                             {
+                              data : 'Notes'
+                            },
+
+                            {
+                              data : 'Code_and_Unit_Testing',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+
+                                  value = parseFloat(document.getElementById("dev_total").value);
+                                } else {
+                                  setTotalValue(row, value,'dev_total');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            },
+                            {
+                              data : 'Design',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+
+                                  value = parseFloat(document.getElementById("design_total").value);
+                                } else {
+                                  setTotalValue(row, value,'design_total');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            },
+                            {
+                              data : 'Testing_and_Debugging',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+
+                                  value = parseFloat(document.getElementById("testing_total").value);
+                                } else {
+                                  setTotalValue(row, value,'testing_total');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            }, {
+
+                              data : 'BA',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+
+                                  value = parseFloat(document.getElementById("ba_total").value);
+                                } else {
+                                  setTotalValue(row, value,'ba_total');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            }, {
+                              data : 'Total',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+                                  value = parseFloat(document.getElementById("total").value);
+                                } else {
+                                  setTotalValue(row, value,'total');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            }, {
+                              data : 'Buffered',
+                              type : 'numeric',
+                              format : '0,0',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+
+                                  value = parseFloat(document.getElementById("buffered").value);
+                                } else {
+                                  setTotalValue(row, value,'buffered');
+                                }
+
+                                Handsontable.renderers.NumericRenderer
+                                    .apply(
+                                        this,
+                                        arguments);
+                              }
+                            }, {
+                              data : 'Effort',
+                              readOnly : true
+                            } ],
+
                     // columns: [
                     //   {
                     //     data: 'Features',
