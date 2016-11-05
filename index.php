@@ -1,5 +1,6 @@
 <!DOCTYPE doctype html>
 <?php
+
 include('config.php');
 include('validate_token.php');
 $project_id = isset($_GET['project_id'])? $_GET['project_id']:'';
@@ -146,9 +147,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         <div id="example1">
                                         </div>
                                         <ul class="nav nav-tabs" id="sheetlist">
-                                            <!-- <li><a href="" data-toggle="tab">One</a></li>
+                                            <li><a href="" data-toggle="tab">One</a></li>
                                             <li><a href="" data-toggle="tab">Two</a></li>
-                                            <li><a href="" data-toggle="tab">Twee</a></li> -->
+                                            <li><a href="" data-toggle="tab">Twee</a></li>
                                         </ul>
                                         <!-- </div> -->
                                     </div> 
@@ -284,7 +285,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         clearTimeout(autosaveNotification);
                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
                                             if (recieve) {// alert(change);
-                                               // socket.emit('comment added', {usertext: change});
+                                             //   socket.emit('comment added', {usertext: change});
                                             }
                                             exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                                             autosaveNotification = setTimeout(function () {
@@ -303,8 +304,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     },
                                     beforeSetRangeEnd: function (change, source) {
-                                         console.log(JSON.stringify({data: change}));
-                                       // socket.emit('comment added', {usertext: change});
+                                        console.log(JSON.stringify({data: change}));
+                                      //  socket.emit('comment added', {usertext: change});
                                         recieve = true;
                                     },
                                     beforeChange: function (changes) {
@@ -317,12 +318,13 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 c;
 
                                     },
-                                    cells: function(r,c, prop) {
-                                         var cellProperties = {};
-                                  //        console.log(hot.getData()[r][prop]);
-                                         if (r===51) cellProperties.readOnly = true;
-                                         return cellProperties;        
-                                     }
+                                    cells: function (r, c, prop) {
+                                        var cellProperties = {};
+                                        //        console.log(hot.getData()[r][prop]);
+                                        if (r === 51)
+                                            cellProperties.readOnly = true;
+                                        return cellProperties;
+                                    }
 
                                 });
                                 //     resetState = document.querySelector('.reset-state');
@@ -378,63 +380,73 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
                                 var valz = "";
                                 $(document).ready(function () {
+/*
+                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
+                                    socket.on('notifyeveryone', function (msg) {
+                                        //  console.log("event" + JSON.stringify(msg));
+                                        // alert(JSON.stringify(msg));
+                                        notifyMe(msg);
 
+                                        recieve = false;
+                                    });
+*/
                                     function notifyMe(data) {// alert(1);
                                         var res = data;
                                         console.log(JSON.stringify(res));
                                         $.each(res.user, function (k, v) {
-                                         
-                                          row=v[0];
-                                          col=v[1];
-                                          valz=v[3]; console.log(row+'--'+col);
-                                           $('#example1 td').each(function(key,val) { 
-                                            var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
-                                            if(key==index){ //alert(2);
-                                               
-                                               $(this).css('border', '1px solid red');
+
+                                            row = v[0];
+                                            col = v[1];
+                                            valz = v[3];
+                                            console.log(row + '--' + col);
+                                            /*    $('#example1 td').each(function(key,val) { 
+                                             var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
+                                             if(key==index){ //alert(2);
+                                             
+                                             // $(this).css('border', '1px solid red');
+                                             }
+                                             
+                                             
+                                             });*/
+                                            if (valz) {
+                                                hot.setDataAtCell(row, col, valz);
                                             }
-                                            
 
-                                          });
-                                          if(valz){
-                                            hot.setDataAtCell(row, col, valz);
-                                          } 
 
-                                         
-                                          
-                                        }); 
-                                        $.each(res.user, function (k, v) { 
-                                            console.log(k+'--'+v);
+
+                                        });
+                                        $.each(res.user, function (k, v) {
+                                            console.log(k + '--' + v);
                                             if (k == "row") {
                                                 row = v;
                                             } else if (k == 'col') {
                                                 col = v;
-                                            } 
-                                            $('#example1 td').each(function(key,val) { 
-                                            var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
-                                            if(key==index){ console.log(key+'-gg-'+index);
-                                               
-                                               $(this).css('border', '1px solid red');
-                                            }else{
-                                               $(this).css('border-color', '#E6E6E6');
-                                            } 
-                                            
+                                            }
+                                            $('#example1 td').each(function (key, val) {
+                                                var index = ((row) * 9) + (col); //console.log(key+'-gg-'+index);
+                                                if (key == index) {
+                                                
 
-                                          });
+                                                    $(this).css('border', '1px solid red');
+                                                } else {
+                                                    $(this).css('border-color', '#E6E6E6');
+                                                }
+
+
+                                            });
                                         });
-                                       
+
 
                                     }
                                     var project_id = '<?php echo $project_id; ?>';
-                                    if(project_id){
-                                      $.ajax({
+                                    $.ajax({
                                         url: "actions.php",
                                         type: 'post',
                                         data: 'project_id=' + project_id + '&action=get_sheets',
@@ -452,9 +464,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             $("#sheetlist").html(sheetTabString);
 
                                         }
-                                      });  
-                                    }
-                                    
+                                    });
 
                                 });
     </script>
