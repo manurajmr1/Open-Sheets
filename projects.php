@@ -1,10 +1,11 @@
 <?php 
 include('config.php');
-
+include('validate_token.php');
 date_default_timezone_set("Asia/Kolkata");
 $today           = date('Y-m-d');
-$loggedUserEmail = "chinchu.kurian@fingent.com";
-$sql    		 = "SELECT * FROM fingent_projects ORDER BY created_on DESC"; 
+$loggedUserEmail = $_SESSION['google_data']['email'];
+$sql    		 = "SELECT fp.id,fp.project_name,fp.created_by,fp.created_on FROM fingent_projects fp LEFT JOIN fingent_project_sheet_shared_users fpss ON fp.id = fpss.project_id 
+					WHERE fp.created_by = '$loggedUserEmail' OR fpss.shared_email = '$loggedUserEmail' ORDER BY fp.created_on DESC"; 
 $query 		     = mysql_query( $sql, $conn );
 $projects			 = [];
 while($row = mysql_fetch_assoc($query)){
@@ -32,6 +33,7 @@ while($row = mysql_fetch_assoc($query)){
 	<link rel="stylesheet" href="css/custom/header-basic.css">
 	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	.projects-div {
 		border:1px solid #CDCDCD;
@@ -66,11 +68,14 @@ while($row = mysql_fetch_assoc($query)){
 					<a href="#" style="float:left">Fingent Sheets</a>					
 				</nav>
 			</div> -->
-			<a class="header-title">Fingent Sheets</a>
-			<span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+			<a class="header-title" href="projects.php">Fingent Sheets</a>
+			<span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
 		</header>
 
 		<!-- The content of your page would go here. -->
+		<div class="" style="float:right;margin-right: 85px;margin-top: 5px;"> 
+			<a class="btn btn-primary" href="actions.php?action=new_project">New Project</a>
+		</div>
 		<div style="margin:50px;padding:5px;">
 			<?php if(count($projects) > 0){?>
 				<?php if(isset($projects['today'])){?>

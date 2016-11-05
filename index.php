@@ -105,8 +105,10 @@ Loading demo dependencies. They are used here only to enhance the examples on th
             }
             .usertext{
               padding:5px;
+              float:left
             }
-
+            
+            input {height:30px}
         </style>
 
     </head>
@@ -118,9 +120,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
-      <a class="header-title">Fingent Sheets</a>
-      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+
+      <div>
+      <a class="header-title" href="projects.php" style="text-decoration:none">Fingent Sheets</a>
+      <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+      </div>
+
     </header>
+        
         <div class="wrapper">
             <div class="wrapper-row">
                 <div id="container" style="widht:100%;">
@@ -128,11 +135,18 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
-                                    <div class="usertext">
-                                    Project Name : <input type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
-                                    Sheet Name : <input type="text" name="sheet_name" id="sheet_name" value="">
+                                    <div style="overflow: auto;padding:5px;">
+                                    <div class="usertext form-group">
+                                    <span class="col-md-3">Project Name : </span><div ><input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><div>
+                                    <span class="col-md-3">Sheet Name   : </span><div><input  type="text" name="sheet_name" id="sheet_name" value=""></div>
                                     </div>
+
                                     <p style="display:none;">
+
+                                    <div style="float:right">
+                                        <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                </div></div>
+                                    
                                         <button id="load" name="load">
                                             Load
                                         </button>
@@ -160,7 +174,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
-                                            Dump data to console
+                                            Save
                                         </button>
                                     </p>
                                     </input>
@@ -431,7 +445,10 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
@@ -502,15 +519,25 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
 
                                     }
-                                   
+
                                 });
 
     function changeSheet(sheet_id){
+
+        $("#sheetlist").find("li").removeClass('active');
+        $("#"+sheet_id).addClass('active');
+
         $.ajax({
               url: "actions.php",
               type: 'post',
               data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
               success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var sheet_name = resultData['sheet_name']; 
+                  $("#sheet_name").val(sheet_name);
+                }
+                
 
               }
         });
@@ -528,6 +555,64 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               }
         });
     }
+
+    
+ 
+
+
+    function getProjectDetails(project_id){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=get_project_details',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var project_name = resultData['project_name']; 
+                  $("#project_name").val(project_name);
+                }
+                
+
+              }
+        });
+    }
+
+    function createNewSheet(){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=new_sheet',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var sheet_name = resultData['project_name']; 
+                  $("#sheet_name").val(sheet_name);
+                }
+                
+
+              }
+      });
+    }
+
     </script>
+    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share with others</h4>
+      </div>
+      <div class="modal-body">
+          <input type="text" class="form-control" id="tokenfield-typeahead" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

@@ -65,7 +65,7 @@ color:black}
 <?php
 if (isset($_GET['msg'])) {echo "<center><h3>" . $_GET['msg'] . "</h3></center>";}
 if ($gClient->getAccessToken()) {
-    $userProfile = $google_oauthV2->userinfo->get();print_r($userProfile);
+    $userProfile = $google_oauthV2->userinfo->get();
     $_SESSION['google_data'] = $userProfile;
     header("location: projects.php");
     $_SESSION['token'] = $gClient->getAccessToken();
