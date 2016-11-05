@@ -61,6 +61,7 @@ tr:nth-child(even) {
 	color: #394242;
 	font-weight:bold;
 }
+
 </style>
 </head>
 <?php 
@@ -101,40 +102,45 @@ while($row = mysql_fetch_assoc($query)){
 <hr>
 <div style="margin:50px"></div>
 <?php if(count($projects) > 0){?>
-<?php if(isset($projects['today'])){?>
+	<?php if(isset($projects['today'])){?>
 
-<div class="container" >
-	<div class="" style="margin: 20px 0px 20px 0px;"> 
-	<div>
-		<span class="section-title"><b>Today</b></span>
+	<div class="container" >
+		<div class="" style="margin: 20px 0px 20px 0px;"> 
+		<div>
+			<span class="section-title"><b>Today</b></span>
+		</div>
+		<?php foreach($projects['today'] as $project){?>    
+	    	<div class="projects-div" >	
+	 	  		<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+	 	  		<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
+	 	  	</div>	
+		<?php }?>
+		</div>
 	</div>
-	<?php foreach($projects['today'] as $project){?>    
-    	<div class="projects-div" >	
- 	  		<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><?php echo $project['project_name'];?></a>	
- 	  	</div>	
 	<?php }?>
-	</div>
-</div>
-<?php }?>
-<?php if(isset($projects['earlier'])){?>
-<?php if(isset($projects['today']) && isset($projects['earlier'])){?>
+	<?php if(isset($projects['earlier'])){?>
 
-<?php }?>
-<div class="container">
-	<div class="" style="margin: 20px 0px 20px 0px;">
-	<div>
-		<span class="section-title"><b>Earlier</b></span>
-	</div>
-	<?php foreach($projects['earlier'] as $project){?>
-	<div class="projects-div">	
- 	  	<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><?php echo $project['project_name'];?></a>	
+	<div class="container">
+		<div class="" style="margin: 20px 0px 20px 0px;">
+		<?php if(isset($projects['today']) && isset($projects['earlier'])){?>
+			<div>
+				<span class="section-title"><b>Earlier</b></span>
+			</div>
+		<?php }?>
+		
+		<?php foreach($projects['earlier'] as $project){?>
+		<div class="projects-div">	
+	 	  	<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+	 	  	<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>	
  	  	</div>
-	<?php }?>
-	
-	</table>
+		<?php }?>
+		
+		</table>
+		</div>
 	</div>
-</div>
-<?php }?>
+	<?php }?>
+<?php }else{?>
+	<div class="container" >No projects</div>
 <?php }?>
 
 </body>

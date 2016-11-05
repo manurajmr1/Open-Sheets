@@ -8,8 +8,11 @@ switch ($action) {
     case 'save_sheet':
         saveSheet($_REQUEST);
         break;
+    case 'get_sheet_data_excel':
+        getSheetData($_REQUEST,'excel');
+        break;
     case 'get_sheet_data':
-        getSheetData($_REQUEST);
+        getSheetData($_REQUEST,'edit');
         break;    
     
     default:
@@ -76,13 +79,24 @@ function saveSheet($data){
 	echo json_encode($returnArray);exit;
 }
 
-function getSheetData($data){
+function getSheetData($data,$type){
 	$sheet_id 		= $data['sheet_id'];
 
 	$sql 	= "SELECT fpsd.data FROM fingent_project_sheet_data fpsd INNER JOIN fingent_project_sheets fps ON fps.id = fpsd.sheet_id WHERE fpsd.sheet_id = $sheet_id ";
 	$query 	= mysql_query($sql);
 	$result = mysql_fetch_assoc($query);
-	echo json_encode($result['data']);exit; 
+	if($type == "edit"){
+		$sheetDatas   = json_decode($result['data'],true);
+		$sheetDataArray = [];
+		foreach($sheetDatas as $sheetData){		
+			$sheetDataArray[] = array_values($sheetData);
+		}
+		echo json_encode($sheetDataArray);exit;
+	}else{
+		echo $result['data'];exit; 
+	}
+	
+	
 
 }
 ?>
