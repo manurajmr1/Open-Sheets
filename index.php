@@ -1,4 +1,7 @@
 <!DOCTYPE doctype html>
+<?php
+$project_id = $_GET['project_id'];
+?>
 <html>
     <head> 
         <meta charset="utf-8">
@@ -39,13 +42,54 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         <script src="js/ga.js">
         </script>
 
-        </link>
-        </link>
-        </link>
-        </link>
-        </link>
-        </link>
-        </meta>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            .tabs-below > .nav-tabs,
+            .tabs-right > .nav-tabs,
+            .tabs-left > .nav-tabs {
+                border-bottom: 0;
+            }
+
+            .tab-content > .tab-pane,
+            .pill-content > .pill-pane {
+                display: none;
+            }
+
+            .tab-content > .active,
+            .pill-content > .active {
+                display: block;
+            }
+
+            .tabs-below > .nav-tabs {
+                border-top: 1px solid #ddd;
+            }
+
+            .tabs-below > .nav-tabs > li {
+                margin-top: -1px;
+                margin-bottom: 0;
+            }
+
+            .tabs-below > .nav-tabs > li > a {
+                -webkit-border-radius: 0 0 4px 4px;
+                -moz-border-radius: 0 0 4px 4px;
+                border-radius: 0 0 4px 4px;
+            }
+
+            .tabs-below > .nav-tabs > li > a:hover,
+            .tabs-below > .nav-tabs > li > a:focus {
+                border-top-color: #ddd;
+                border-bottom-color: transparent;
+            }
+
+            .tabs-below > .nav-tabs > .active > a,
+            .tabs-below > .nav-tabs > .active > a:hover,
+            .tabs-below > .nav-tabs > .active > a:focus {
+                border-color: transparent #ddd #ddd #ddd;
+                font-weight: bold;
+            }
+
+        </style>
+
     </head>
     <body>
         <div class="wrapper">
@@ -72,8 +116,17 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </p>
                                     <input id="formula" name="formula" type="text" value="">
                                     <pre class="console" id="example1console">Click "Load" to load data from server</pre>
-                                    <div id="example1">
-                                    </div>
+                                    <div class="tabbable tabs-below">
+                                        <!-- <div class="tab-content">  -->
+                                        <div id="example1">
+                                        </div>
+                                        <ul class="nav nav-tabs" id="sheetlist">
+                                            <li><a href="" data-toggle="tab">One</a></li>
+                                            <li><a href="" data-toggle="tab">Two</a></li>
+                                            <li><a href="" data-toggle="tab">Twee</a></li>
+                                        </ul>
+                                        <!-- </div> -->
+                                    </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
                                             Dump data to console
@@ -119,7 +172,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
-                                    ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],                                    
+                                    ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
@@ -139,7 +192,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["", "", 0, "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100", "=C2*20/100"],
                                     ["Total", "", 0, "=SUM(D1:D33)", "=SUM(E1:E33)", "=SUM(F1:F33)", "=SUM(G1:G33)", "=SUM(H1:H33)", "=SUM(I1:I33)"]
-                                    
+
                                 ];
 
                                 var $ = function (id) {
@@ -189,9 +242,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 //                                    maxRows: 52,
                                     comments: true,
                                     formulas: true,
-                                    
-                                            cell: [
-                                            ],
+                                    cell: [
+                                    ],
                                     dropdownMenu: true,
                                     mergeCells: [
                                     ],
@@ -206,8 +258,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         }
                                         clearTimeout(autosaveNotification);
                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
-                                            if (recieve) { //alert('in');
-                                                socket.emit('comment added', {usertext: change});
+                                            if (recieve) {// alert(change);
+                                               // socket.emit('comment added', {usertext: change});
                                             }
                                             exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                                             autosaveNotification = setTimeout(function () {
@@ -227,7 +279,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     },
                                     beforeSetRangeEnd: function (change, source) {
                                         // console.log(JSON.stringify({data: change}));
-                                        socket.emit('comment added', {usertext: change});
+                                      //  socket.emit('comment added', {usertext: change});
                                         recieve = true;
                                     },
                                     beforeChange: function (changes) {
@@ -239,7 +291,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 i,
                                                 c;
 
-                                    }
+                                    },
+                                    cells: function(r,c, prop) {
+                                         var cellProperties = {};
+                                  //        console.log(hot.getData()[r][prop]);
+                                         if (r===51) cellProperties.readOnly = true;
+                                         return cellProperties;        
+                                     }
+
                                 });
                                 //     resetState = document.querySelector('.reset-state');
                                 stateLoaded = document.querySelector('.state-loaded');
@@ -294,15 +353,15 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-    <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
                                 var valz = "";
                                 $(document).ready(function () {
 
-                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
+                                   /* socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
                                     socket.on('notifyeveryone', function (msg) {
                                         //  console.log("event" + JSON.stringify(msg));
                                         // alert(JSON.stringify(msg));
@@ -310,11 +369,21 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         recieve = false;
                                     });
-
+*/
                                     function notifyMe(data) {
                                         var res = data;
-
+                                        console.log(res);
                                         $.each(res.user, function (k, v) {
+                                          console.log(k+'--'+v);
+                                          row=v[0];
+                                          col=v[1];
+                                          valz=v[3];
+                                          if(valz){
+                                            hot.setDataAtCell(row, col, valz);
+                                          } 
+                                          
+                                        });
+                                       /* $.each(res.user, function (k, v) {
                                             //console.log(k+'--'+v);
                                             if (k == "row") {
                                                 row = v;
@@ -322,7 +391,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 col = v;
                                             } else {
 
-                                                //  console.log(k+'--jj-------'+v[3]);
+                                                  console.log(k+'--jj-------'+v[3]);
                                                 valz = v[3];
                                             }
 
@@ -332,9 +401,30 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             hot.setDataAtCell(row, col, valz);
 
                                             valz = null;
-                                        }
+                                        }*/
 
                                     }
+                                    var project_id = '<?php echo $project_id; ?>';
+                                    $.ajax({
+                                        url: "actions.php",
+                                        type: 'post',
+                                        data: 'project_id=' + project_id + '&action=get_sheets',
+                                        success: function (result) {
+                                            var sheetData = $.parseJSON(result);
+                                            var sheetTabString = '';
+                                            $.each(sheetData, function (key, value) {
+                                                sheetClass = '';
+                                                if (key == 0) {
+                                                    sheetClass = ' class="active "';
+                                                }
+                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a href="" data-toggle="tab">' + value.sheet_name + '</a></li>';
+                                            });
+                                            sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
+                                            $("#sheetlist").html(sheetTabString);
+
+                                        }
+                                    });
+
                                 });
     </script>
 </body>

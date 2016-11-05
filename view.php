@@ -1,7 +1,11 @@
 <!DOCTYPE doctype html>
+<?php 
+  $project_id = $_GET['project_id'];
+?>
 <html>
     <head> 
         <meta charset="utf-8">
+
         <!--
 Loading Handsontable (full distribution that includes all dependencies apart from jQuery)
         -->
@@ -45,8 +49,130 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </link>
         </link>
         </link>
+
+            <!--
+  Loading Handsontable (full distribution that includes all dependencies apart from jQuery)
+  -->
+
+            <link data-jsfiddle="common" href="dist/handsontable.css" media="screen" rel="stylesheet">
+                <link data-jsfiddle="common" href="dist/pikaday/pikaday.css" media="screen" rel="stylesheet">
+                    <script data-jsfiddle="common" src="dist/pikaday/pikaday.js">
+                    </script>
+                    <script data-jsfiddle="common" src="dist/moment/moment.js">
+                    </script>
+                    <script data-jsfiddle="common" src="dist/zeroclipboard/ZeroClipboard.js">
+                    </script>
+                    <script data-jsfiddle="common" src="dist/numbro/numbro.js">
+                    </script>
+                    <script data-jsfiddle="common" src="dist/numbro/languages.js">
+                    </script>
+                    <script data-jsfiddle="common" src="dist/handsontable.js">
+                    </script>
+                    <!-- arun -->
+                    <script data-jsfiddle="common" src="rules/bower_components/ruleJS/dist/full/ruleJS.all.full.js">
+                    </script>
+                    <script data-jsfiddle="common" src="rules/src/handsontable.formula.js">
+                    </script>
+                    <link href="rules/src/handsontable.formula.css" media="screen" rel="stylesheet">
+                        <!-- arun -->
+                        <!--
+  Loading demo dependencies. They are used here only to enhance the examples on this page
+  -->
+                        <link href="css/samples.css?20140331" media="screen" rel="stylesheet">
+                            <script data-jsfiddle="common" src="js/samples.js">
+                            </script>
+                            <script src="js/highlight/highlight.pack.js">
+                            </script>
+                            <link href="js/highlight/styles/github.css" media="screen" rel="stylesheet">
+                                <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+                                    <script src="js/ga.js">
+                                    </script>
+                                    <!-- <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script language="JavaScript">
+var socket ="";var roomId ="";
+  
+        $(document).ready(function(){
+           
+             socket = io.connect( 'http://fts-dsk-062.ftsindia.in:8080' );
+               socket.on('notifyeveryone',function(msg){
+                    console.log("event" +JSON.stringify(msg));
+                    alert(JSON.stringify(msg));
+                    notifyMe(msg);
+                  
+
+            });
+
+            function notifyMe(data){
+              var res=data;
+              console.log( res['user'][0][0]);
+             // $('#example1').handsontable('setDataAtCell', res['user'][0][0], res['user'][0][1], res['user'][0][3]);
+
+
+            }
+        });
+  </script> -->
+                                </link>
+                            </link>
+                        </link>
+                    </link>
+                </link>
+            </link>
+
+>>>>>>> 94be7b06cd80bab7938709c3cee00c27e2a01c5d
         </meta>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+        .tabs-below > .nav-tabs,
+        .tabs-right > .nav-tabs,
+        .tabs-left > .nav-tabs {
+          border-bottom: 0;
+        }
+
+        .tab-content > .tab-pane,
+        .pill-content > .pill-pane {
+          display: none;
+        }
+
+        .tab-content > .active,
+        .pill-content > .active {
+          display: block;
+        }
+
+        .tabs-below > .nav-tabs {
+          border-top: 1px solid #ddd;
+        }
+
+        .tabs-below > .nav-tabs > li {
+          margin-top: -1px;
+          margin-bottom: 0;
+        }
+
+        .tabs-below > .nav-tabs > li > a {
+          -webkit-border-radius: 0 0 4px 4px;
+             -moz-border-radius: 0 0 4px 4px;
+                  border-radius: 0 0 4px 4px;
+        }
+
+        .tabs-below > .nav-tabs > li > a:hover,
+        .tabs-below > .nav-tabs > li > a:focus {
+          border-top-color: #ddd;
+          border-bottom-color: transparent;
+        }
+
+        .tabs-below > .nav-tabs > .active > a,
+        .tabs-below > .nav-tabs > .active > a:hover,
+        .tabs-below > .nav-tabs > .active > a:focus {
+          border-color: transparent #ddd #ddd #ddd;
+          font-weight: bold;
+        }
+
+        </style>
+
+
     </head>
+
+
     <body>
         <div class="wrapper">
             <div class="wrapper-row">
@@ -71,6 +197,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         </label>
                                     </p>
                                     <input id="formula" name="formula" type="text" value="">
+<<<<<<< HEAD
                                     <pre class="console" id="example1console">Click "Load" to load data from server</pre>
                                     <div id="example1">
                                     </div>
@@ -79,10 +206,30 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             Dump data to console
                                         </button>
                                     </p>
+=======
+                                        <pre class="console" id="example1console">Click "Load" to load data from server</pre>
+                                         <div class="tabbable tabs-below">
+                                          <!-- <div class="tab-content">  -->
+                                            <div id="example1">
+                                            </div>
+                                            <ul class="nav nav-tabs" id="sheetlist">
+                                              <!-- <li><a href="" data-toggle="tab">One</a></li>
+                                              <li><a href="" data-toggle="tab">Two</a></li>
+                                              <li><a href="" data-toggle="tab">Twee</a></li> -->
+                                            </ul>
+                                           <!-- </div> -->
+                                        </div> 
+                                        <p>
+                                            <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
+                                                Dump data to console
+                                            </button>
+                                        </p>
+>>>>>>> 94be7b06cd80bab7938709c3cee00c27e2a01c5d
                                     </input>
                                 </div>
                             </div>
                             <input type="textfield" id="dev_total" value="0" style="display: none" />
+<<<<<<< HEAD
                             <input type="textfield" id="design_total" value="0" style="display: none" />
                             <input type="textfield" id="testing_total" value="0" style="display: none" />
                             <input type="textfield" id="ba_total" value="0" style="display: none" />
@@ -106,6 +253,105 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         hot;
                                 function update_last_row() {
                                     console.log(data1.length);
+=======
+                             <input type="textfield" id="design_total" value="0" style="display: none" />
+                             <input type="textfield" id="testing_total" value="0" style="display: none" />
+                              <input type="textfield" id="ba_total" value="0" style="display: none" />
+                              <input type="textfield" id="total" value="0" style="display: none" />
+                              <input type="textfield" id="buffered" value="0" style="display: none" />
+<script data-jsfiddle="example1">
+
+  var data1 = [{Features:"login", price: 25, Notes: "login to", Code_and_Unit_Testing: 10, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:50,Effort:20},{Features:"feature1", price: 74.99, Notes: "feature1 note", Code_and_Unit_Testing:11, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:30,Effort:15}];
+
+var $ = function(id) {
+        return document.getElementById(id);
+    },
+    container = $('example1'),
+    exampleConsole = $('example1console'),
+    autosave = $('autosave'),
+    load = $('load'),
+    save = $('save'),
+    autosaveNotification,
+    hot;
+    function update_last_row(){
+        console.log(data1.length);
+    }
+    function isNumber(input) {
+                return (input - 0) == input
+                    && ('' + input).replace(/^\s+|\s+$/g,
+                        "").length > 0;
+              }
+    function setTotalValue(curRow, curVal,text_id){
+                var sum;
+                var eleCellTotal = document.getElementById(text_id);
+                if(curRow == 0){
+                  eleCellTotal.value = "0";
+                  sum = parseFloat("0");
+                  eleCellTotal.value = "" + sum;
+                } else {
+                  sum = parseFloat(document.getElementById(text_id).value);
+                }
+                if(!isNumber(curVal)){
+                  return;
+                }
+                sum = sum + parseFloat(curVal);
+                eleCellTotal.value = "" + sum;
+              }
+    function isEmptyRow(instance, row) {
+    var rowData = instance.getData()[row];
+
+    for (var i = 0, ilen = rowData.length; i < ilen; i++) {
+      if (rowData[i] !== null) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+
+                hot = new Handsontable(container, {
+                  data: data1,
+                  startRows: 15,
+                  startCols: 20,
+                  rowHeaders: true,
+                  colHeaders: true,
+                  minSpareRows: 1,
+                  contextMenu: true,
+                  manualColumnResize: true,
+                  manualRowResize: true,
+                  manualColumnMove: true,
+                  manualRowMove: true,
+                  contextMenu: true,
+                  persistentState: true,
+                  manualColumnFreeze: true,
+                 
+                  fixedColumnsLeft: 2,
+                   comments: true,
+                   formulas: true,
+                   colHeaders: ['Features', 'Notes', 'Code and Unit Testing', 'Design','Testing and Debugging',
+'BA','Total','Buffered','Effort'],
+
+                    columns : [
+                            {
+                              data : 'Features',
+                              renderer : function(
+                                  instance,
+                                  td, row,
+                                  col, prop,
+                                  value) {
+                                if (row == instance
+                                    .countRows() - 1) {
+                                  td.style.fontWeight = 'bold';
+                                  td.style.textAlign = 'right';
+                                  td.innerText = 'Total: ';
+                                  return;
+                                } else {
+                                  Handsontable.renderers.TextRenderer
+                                      .apply(
+                                          this,
+                                          arguments);
+>>>>>>> 94be7b06cd80bab7938709c3cee00c27e2a01c5d
                                 }
                                 function isNumber(input) {
                                     return (input - 0) == input
@@ -427,6 +673,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
         <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -470,6 +717,50 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     }
                                 });
+=======
+            
+    
+    </div>
+  </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+        </script>
+        <script language="JavaScript">
+            $(document).ready(function(){
+     $('td').click(function(){     
+      var row_index = $(this).parent().index();    
+      var col_index = $(this).index(); 
+      // console.log(row_index+"."+col_index); 
+    });
+     // $('#formula').on('blur',function(){
+
+     // });
+      var project_id = '<?php echo $project_id;?>';
+      $.ajax({
+        url: "actions.php",
+        type: 'post',
+        data: 'project_id='+project_id+'&action=get_sheets',
+        success: function (result) {
+          var sheetData = $.parseJSON(result);
+          var sheetTabString = '';
+          $.each(sheetData,function(key,value){
+            sheetClass = '';
+            if(key == 0){
+              sheetClass = ' class="active "';
+            }
+            sheetTabString += '<li id="'+value.sheet_id+'" '+sheetClass+' ><a href="" data-toggle="tab">'+value.sheet_name+'</a></li>';  
+          });  
+          sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';         
+          $("#sheetlist").html(sheetTabString);
+
+        }
+      }); 
+
+
+   });
+
+
+
+>>>>>>> 94be7b06cd80bab7938709c3cee00c27e2a01c5d
         </script>
     </body>
 </html>
