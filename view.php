@@ -348,7 +348,6 @@ var $ = function(id) {
                               data : 'Effort',
                               readOnly : true
                             } ],
-
                     // columns: [
                     //   {
                     //     data: 'Features',
