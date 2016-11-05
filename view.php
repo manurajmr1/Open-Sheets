@@ -1,10 +1,14 @@
 <!DOCTYPE doctype html>
+<?php 
+  $project_id = $_GET['project_id'];
+?>
 <html>
     <head> 
         <meta charset="utf-8">
             <!--
   Loading Handsontable (full distribution that includes all dependencies apart from jQuery)
   -->
+
             <link data-jsfiddle="common" href="dist/handsontable.css" media="screen" rel="stylesheet">
                 <link data-jsfiddle="common" href="dist/pikaday/pikaday.css" media="screen" rel="stylesheet">
                     <script data-jsfiddle="common" src="dist/pikaday/pikaday.js">
@@ -69,8 +73,60 @@ var socket ="";var roomId ="";
                     </link>
                 </link>
             </link>
+
         </meta>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+        .tabs-below > .nav-tabs,
+        .tabs-right > .nav-tabs,
+        .tabs-left > .nav-tabs {
+          border-bottom: 0;
+        }
+
+        .tab-content > .tab-pane,
+        .pill-content > .pill-pane {
+          display: none;
+        }
+
+        .tab-content > .active,
+        .pill-content > .active {
+          display: block;
+        }
+
+        .tabs-below > .nav-tabs {
+          border-top: 1px solid #ddd;
+        }
+
+        .tabs-below > .nav-tabs > li {
+          margin-top: -1px;
+          margin-bottom: 0;
+        }
+
+        .tabs-below > .nav-tabs > li > a {
+          -webkit-border-radius: 0 0 4px 4px;
+             -moz-border-radius: 0 0 4px 4px;
+                  border-radius: 0 0 4px 4px;
+        }
+
+        .tabs-below > .nav-tabs > li > a:hover,
+        .tabs-below > .nav-tabs > li > a:focus {
+          border-top-color: #ddd;
+          border-bottom-color: transparent;
+        }
+
+        .tabs-below > .nav-tabs > .active > a,
+        .tabs-below > .nav-tabs > .active > a:hover,
+        .tabs-below > .nav-tabs > .active > a:focus {
+          border-color: transparent #ddd #ddd #ddd;
+          font-weight: bold;
+        }
+
+        </style>
+
+
     </head>
+
+
     <body>
         <div class="wrapper">
             <div class="wrapper-row">
@@ -96,8 +152,17 @@ var socket ="";var roomId ="";
                                     </p>
                                     <input id="formula" name="formula" type="text" value="">
                                         <pre class="console" id="example1console">Click "Load" to load data from server</pre>
-                                        <div id="example1">
-                                        </div>
+                                         <div class="tabbable tabs-below">
+                                          <!-- <div class="tab-content">  -->
+                                            <div id="example1">
+                                            </div>
+                                            <ul class="nav nav-tabs" id="sheetlist">
+                                              <!-- <li><a href="" data-toggle="tab">One</a></li>
+                                              <li><a href="" data-toggle="tab">Two</a></li>
+                                              <li><a href="" data-toggle="tab">Twee</a></li> -->
+                                            </ul>
+                                           <!-- </div> -->
+                                        </div> 
                                         <p>
                                             <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
                                                 Dump data to console
@@ -486,6 +551,10 @@ var $ = function(id) {
                 </div>
             </div>
         </div>
+            
+    
+    </div>
+  </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
         </script>
         <script language="JavaScript">
@@ -498,7 +567,32 @@ var $ = function(id) {
      // $('#formula').on('blur',function(){
 
      // });
+      var project_id = '<?php echo $project_id;?>';
+      $.ajax({
+        url: "actions.php",
+        type: 'post',
+        data: 'project_id='+project_id+'&action=get_sheets',
+        success: function (result) {
+          var sheetData = $.parseJSON(result);
+          var sheetTabString = '';
+          $.each(sheetData,function(key,value){
+            sheetClass = '';
+            if(key == 0){
+              sheetClass = ' class="active "';
+            }
+            sheetTabString += '<li id="'+value.sheet_id+'" '+sheetClass+' ><a href="" data-toggle="tab">'+value.sheet_name+'</a></li>';  
+          });  
+          sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';         
+          $("#sheetlist").html(sheetTabString);
+
+        }
+      }); 
+
+
    });
+
+
+
         </script>
     </body>
 </html>
