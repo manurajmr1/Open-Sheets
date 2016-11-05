@@ -178,7 +178,7 @@ var $ = function(id) {
                   contextMenu: true,
                   persistentState: true,
                   manualColumnFreeze: true,
-                  fixedRowsTop: 2,
+                 
                   fixedColumnsLeft: 2,
                    comments: true,
                    formulas: true,

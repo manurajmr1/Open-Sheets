@@ -58,7 +58,7 @@ while($row = mysql_fetch_assoc($query)){
 			</div>
 		</header>
 
-		<!-- The content of your page would go here. -->
+		
 		<div style="border:1px solid #CDCDCD;margin:50px;padding:5px;">
 			<?php if(count($projects) > 0){?>
 				<?php if(isset($projects['today'])){?>
@@ -86,11 +86,7 @@ while($row = mysql_fetch_assoc($query)){
 
 		</div>
 
-		<div class="menu">
-
-			
-
-		</div>
+		<div class="menu"></div>
 
 
 
