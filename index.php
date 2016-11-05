@@ -278,8 +278,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     },
                                     beforeSetRangeEnd: function (change, source) {
-                                        // console.log(JSON.stringify({data: change}));
-                                      //  socket.emit('comment added', {usertext: change});
+                                         console.log(JSON.stringify({data: change}));
+                                       // socket.emit('comment added', {usertext: change});
                                         recieve = true;
                                     },
                                     beforeChange: function (changes) {
@@ -353,15 +353,15 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-    <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
+  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
                                 var valz = "";
-                                $(document).ready(function () {
-
-                                   /* socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
+                                $(document).ready(function () { alert(1);
+/*
+                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
                                     socket.on('notifyeveryone', function (msg) {
                                         //  console.log("event" + JSON.stringify(msg));
                                         // alert(JSON.stringify(msg));
@@ -370,38 +370,50 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         recieve = false;
                                     });
 */
-                                    function notifyMe(data) {
+                                    function notifyMe(data) {// alert(1);
                                         var res = data;
-                                        console.log(res);
+                                        console.log(JSON.stringify(res));
                                         $.each(res.user, function (k, v) {
-                                          console.log(k+'--'+v);
+                                         
                                           row=v[0];
                                           col=v[1];
-                                          valz=v[3];
+                                          valz=v[3]; console.log(row+'--'+col);
+                                           $('#example1 td').each(function(key,val) { 
+                                            var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
+                                            if(key==index){ //alert(2);
+                                               
+                                               $(this).css('border', '1px solid red');
+                                            }
+                                            
+
+                                          });
                                           if(valz){
                                             hot.setDataAtCell(row, col, valz);
                                           } 
+
+                                         
                                           
-                                        });
-                                       /* $.each(res.user, function (k, v) {
-                                            //console.log(k+'--'+v);
+                                        }); 
+                                        $.each(res.user, function (k, v) { 
+                                            console.log(k+'--'+v);
                                             if (k == "row") {
                                                 row = v;
                                             } else if (k == 'col') {
                                                 col = v;
-                                            } else {
+                                            } 
+                                            $('#example1 td').each(function(key,val) { 
+                                            var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
+                                            if(key==index){ console.log(key+'-gg-'+index);
+                                               
+                                               $(this).css('border', '1px solid red');
+                                            }else{
+                                               $(this).css('border-color', '#E6E6E6');
+                                            } 
+                                            
 
-                                                  console.log(k+'--jj-------'+v[3]);
-                                                valz = v[3];
-                                            }
-
+                                          });
                                         });
-                                        if (valz) {
-
-                                            hot.setDataAtCell(row, col, valz);
-
-                                            valz = null;
-                                        }*/
+                                       
 
                                     }
                                     var project_id = '<?php echo $project_id; ?>';
