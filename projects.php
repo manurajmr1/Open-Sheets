@@ -71,7 +71,7 @@ while($row = mysql_fetch_assoc($query)){
 		</header>
 
 		<!-- The content of your page would go here. -->
-		<div style="border:1px solid #CDCDCD;margin:50px;padding:5px;">
+		<div style="margin:50px;padding:5px;">
 			<?php if(count($projects) > 0){?>
 				<?php if(isset($projects['today'])){?>
 					<span style="margin-left:30px;"><b>Today</b></span>

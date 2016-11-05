@@ -35,7 +35,7 @@ Loading Handsontable (full distribution that includes all dependencies apart fro
         <!--
 Loading demo dependencies. They are used here only to enhance the examples on this page
         -->
-        <link href="css/samples.css?20140331" media="screen" rel="stylesheet">
+        <!-- <link href="css/samples.css?20140331" media="screen" rel="stylesheet"> -->
         <script data-jsfiddle="common" src="js/samples.js">
         </script>
         <script src="js/highlight/highlight.pack.js">
@@ -103,6 +103,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               color:white;
               float:right !important;
             }
+            .usertext{
+              padding:5px;
+            }
 
         </style>
 
@@ -120,14 +123,16 @@ Loading demo dependencies. They are used here only to enhance the examples on th
     </header>
         <div class="wrapper">
             <div class="wrapper-row">
-                <div id="container">
+                <div id="container" style="widht:100%;">
                     <div class="columnLayout">
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
                                     <div class="usertext">
+                                    Project Name : <input type="text" name="project_name" value="Wesdasdas"><br>
+                                    Sheet Name : <input type="text" name="sheet_name" value="Wesdasdas">
                                     </div>
-                                    <p>
+                                    <!-- <p>
                                         <button id="load" name="load">
                                             Load
                                         </button>
@@ -139,19 +144,19 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             Autosave
                                             </input>
                                         </label>
-                                    </p>
-                                    <input id="formula" name="formula" type="text" value="">
-                                    <pre class="console" id="example1console">Click "Load" to load data from server</pre>
-                                    <div class="tabbable tabs-below">
-                                        <!-- <div class="tab-content">  -->
-                                        <div id="example1">
-                                        </div>
+                                    </p> -->
+                                    <!-- <input id="formula" name="formula" type="text" value="">
+                                    <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
+                                    <div class="tabbable tabs-below" >
+                                         <div class="tab-content" >  
+                                          <div id="example1" style="height:750px;widht:100%;">
+                                          </div>
+                                         </div> 
                                         <ul class="nav nav-tabs" id="sheetlist">
-                                            <li><a href="" data-toggle="tab">One</a></li>
+                                            <!-- <li><a href="" data-toggle="tab">One</a></li>
                                             <li><a href="" data-toggle="tab">Two</a></li>
-                                            <li><a href="" data-toggle="tab">Twee</a></li>
-                                        </ul>
-                                        <!-- </div> -->
+                                            <li><a href="" data-toggle="tab">Twee</a></li> -->
+                                        </ul>                                         
                                     </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
@@ -380,8 +385,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
