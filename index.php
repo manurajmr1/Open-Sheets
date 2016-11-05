@@ -136,9 +136,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
                                     <div style="overflow: auto;padding:5px;">
-                                    <div class="usertext form-group">
-                                    <span class="col-md-3">Project Name : </span><div ><input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><div>
-                                    <span class="col-md-3">Sheet Name   : </span><div><input  type="text" name="sheet_name" id="sheet_name" value=""></div>
+                                    <div class="usertext ">
+                                    Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
+                                    Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">
                                     </div>
                                     <div style="float:right">
                                         <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
