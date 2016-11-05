@@ -101,6 +101,11 @@ while($row = mysql_fetch_assoc($query)){
 <!--repeation ends-->
 <hr>
 <div style="margin:50px"></div>
+<div class="container" >
+	<div class="" style="float:right"> 
+		<a class="btn btn-primary" >Create Project</a>
+	</div>
+
 <?php if(count($projects) > 0){?>
 	<?php if(isset($projects['today'])){?>
 
@@ -142,7 +147,7 @@ while($row = mysql_fetch_assoc($query)){
 <?php }else{?>
 	<div class="container" >No projects</div>
 <?php }?>
-
+</div>
 </body>
 
 </head>

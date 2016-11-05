@@ -1,6 +1,6 @@
 <!DOCTYPE doctype html>
 <?php
-$project_id = $_GET['project_id'];
+$project_id = isset($_GET['project_id'])? $_GET['project_id']:'';
 ?>
 <html>
     <head> 
@@ -121,9 +121,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         <div id="example1">
                                         </div>
                                         <ul class="nav nav-tabs" id="sheetlist">
-                                            <li><a href="" data-toggle="tab">One</a></li>
+                                            <!-- <li><a href="" data-toggle="tab">One</a></li>
                                             <li><a href="" data-toggle="tab">Two</a></li>
-                                            <li><a href="" data-toggle="tab">Twee</a></li>
+                                            <li><a href="" data-toggle="tab">Twee</a></li> -->
                                         </ul>
                                         <!-- </div> -->
                                     </div> 
@@ -405,7 +405,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     }
                                     var project_id = '<?php echo $project_id; ?>';
-                                    $.ajax({
+                                    if(project_id){
+                                      $.ajax({
                                         url: "actions.php",
                                         type: 'post',
                                         data: 'project_id=' + project_id + '&action=get_sheets',
@@ -423,7 +424,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             $("#sheetlist").html(sheetTabString);
 
                                         }
-                                    });
+                                      });  
+                                    }
+                                    
 
                                 });
     </script>
