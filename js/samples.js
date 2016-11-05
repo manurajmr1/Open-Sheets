@@ -122,9 +122,9 @@ function ajax(url, method, params, callback) {
         
         var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
         $.ajax({
-              url: "save_sheet.php",
+              url: "actions.php",
               type: 'post',
-              data: 'sheet_id=1&data='+data_sample ,
+              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet' ,
               success: function (result) {
 
               }
