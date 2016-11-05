@@ -353,23 +353,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </div>
 
     </script>
-  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+  <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
                                 var valz = "";
-                                $(document).ready(function () { alert(1);
-/*
-                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
-                                    socket.on('notifyeveryone', function (msg) {
-                                        //  console.log("event" + JSON.stringify(msg));
-                                        // alert(JSON.stringify(msg));
-                                        notifyMe(msg);
+                                $(document).ready(function () {
 
-                                        recieve = false;
-                                    });
-*/
                                     function notifyMe(data) {// alert(1);
                                         var res = data;
                                         console.log(JSON.stringify(res));
