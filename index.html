@@ -158,21 +158,7 @@ var socket ="";var roomId ="";
                    formulas: true,
                    colHeaders: ['Features', 'Notes', 'Code and Unit Testing', 'Design','Testing and Debugging',
 'BA','Total','Buffered','Effort'],
-                    // columns: [
-                    //   {
-                    //     data: 'Features',
-                    //     readOnly: true
-                    //   },
-                    //   {
-                    //     data: 'year'
-                    //   },
-                    //   {
-                    //     data: 'chassis'
-                    //   },
-                    //   {
-                    //     data: 'bumper'
-                    //   }
-                    // ],
+       
                    cell: [
                    ],
                  dropdownMenu: true,
@@ -219,27 +205,7 @@ var socket ="";var roomId ="";
                       rowsToFill = {},
                       i,
                       c;
-//alert(1);
-                  /*  for (i = 0; i < ilen; i++) {
-                      // if oldVal is empty
-                      if (changes[i][2] === null && changes[i][3] !== null) {
-                        if (isEmptyRow(instance, changes[i][0])) {
-                          // add this row/col combination to cache so it will not be overwritten by template
-                          rowColumnSeen[changes[i][0] + '/' + changes[i][1]] = true;
-                          rowsToFill[changes[i][0]] = true;
-                        }
-                      }
-                    }
-                    for (var r in rowsToFill) {
-                      if (rowsToFill.hasOwnProperty(r)) {
-                        for (c = 0; c < clen; c++) {
-                          // if it is not provided by user in this change set, take value from template
-                          if (!rowColumnSeen[r + '/' + c]) {
-                            changes.push([r, c, null, tpl[c]]);
-                          }
-                        }
-                      }
-                    }*/
+
                   }
                 });
               resetState = document.querySelector('.reset-state');
