@@ -56,7 +56,7 @@ io.on('connection',function(socket){
 	socket.on('comment added',function(data){
 		console.log(data.usertext);
 		 //io.emit("notify everyone",{user : data.usertext});
-		  socket.broadcast.emit('notifyeveryone',{user : data.usertext});
+		  socket.broadcast.emit('notifyeveryone',{user : data.usertext,id:data.sheetid});
 	});
 	i++;
 });
