@@ -121,7 +121,7 @@ function ajax(url, method, params, callback) {
         var hot = window[instance];
         
         var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
-        /*$.ajax({
+        $.ajax({
               url: db_functions.php,
               type: 'post',
               data: 'data='+data_sample ,
@@ -129,7 +129,7 @@ function ajax(url, method, params, callback) {
 
 
               }
-          });*/
+          });
       }
     });
   }
