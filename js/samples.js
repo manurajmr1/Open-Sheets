@@ -117,7 +117,7 @@ function ajax(url, method, params, callback) {
 
       if (element.nodeName == "BUTTON" && element.name == 'dump') {
         var name = element.getAttribute('data-dump');
-        var instance = element.getAttribute('data-instance');
+        var instance = element.getAttribute('data-instance');alert(instance);
         var hot = window[instance];
         
         var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
