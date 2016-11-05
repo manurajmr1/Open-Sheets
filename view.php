@@ -339,7 +339,6 @@ var $ = function(id) {
                                 } else {
                                   setTotalValue(row, value,'buffered');
                                 }
-
                                 Handsontable.renderers.NumericRenderer
                                     .apply(
                                         this,
@@ -349,7 +348,6 @@ var $ = function(id) {
                               data : 'Effort',
                               readOnly : true
                             } ],
-
                     // columns: [
                     //   {
                     //     data: 'Features',
