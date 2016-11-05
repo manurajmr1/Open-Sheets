@@ -106,38 +106,39 @@ var socket ="";var roomId ="";
                                     </input>
                                 </div>
                             </div>
-                            <script data-jsfiddle="example1">
-                                var data1 =  [
-                            ["login", 10, 15, 14, 13,"11","=C2/B2","22","33"],
-                            ["feature1", 10, 11, 12, 13,"11","=C2/B2","22","33"],
-                            ["feature2", 20, 11, 14, 13,"11","=C2/B2","22","33"],
-                            ["feature3", 30, 15, 12, 13,"11","=C2/B2","22","33"]
-                          ];
-                var
-                  $ = function(id) {
-                      return document.getElementById(id);
-                  },
-                  container = $('example1'),
-                  exampleConsole = $('example1console'),
-                  autosave = $('autosave'),
-                  load = $('load'),
-                  save = $('save'),
-                  autosaveNotification,
-                  hot;
-                  function update_last_row(){
+<script data-jsfiddle="example1">
+var data1 =  [
+              ["login", 10, 15, 14, 13,"11","=C2/B2","22","33"],
+              ["feature1", 10, 11, 12, 13,"11","=C2/B2","22","33"],
+              ["feature2", 20, 11, 14, 13,"11","=C2/B2","22","33"],
+              ["feature3", 30, 15, 12, 13,"11","=C2/B2","22","33"]
+              ];
 
-                  }
-                  function isEmptyRow(instance, row) {
-                  var rowData = instance.getData()[row];
+var $ = function(id) {
+        return document.getElementById(id);
+    },
+    container = $('example1'),
+    exampleConsole = $('example1console'),
+    autosave = $('autosave'),
+    load = $('load'),
+    save = $('save'),
+    autosaveNotification,
+    hot;
+    function update_last_row(){
 
-                  for (var i = 0, ilen = rowData.length; i < ilen; i++) {
-                    if (rowData[i] !== null) {
-                      return false;
-                    }
-                  }
+      console.log(data1.length);
+    }
+    function isEmptyRow(instance, row) {
+    var rowData = instance.getData()[row];
 
-                  return true;
-                }
+    for (var i = 0, ilen = rowData.length; i < ilen; i++) {
+      if (rowData[i] !== null) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
 
                 hot = new Handsontable(container, {
@@ -195,7 +196,7 @@ var socket ="";var roomId ="";
                     }
                     clearTimeout(autosaveNotification);
                     ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) { 
-                      console.log(JSON.stringify({data: change}));
+                      // console.log(JSON.stringify({data: change}));
                        //socket.emit('comment added',{usertext : change});
                       exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                       autosaveNotification = setTimeout(function() {
@@ -204,14 +205,17 @@ var socket ="";var roomId ="";
                     });
                   },
                    afterCreateRow:function(index,amount){
-                  //console.log(index+' '+amount);
+                      update_last_row();
+                  // console.log(index+' '+amount);
 
+                  },afterRemoveRow:function(index,amount){
+                      update_last_row();
                   },beforeKeyDown:function(changes){
                   //  alert(2);
 
                   },
                    beforeSetRangeEnd:function(change, source){
-                    console.log(JSON.stringify({data: change}));
+                    // console.log(JSON.stringify({data: change}));
                     
                  },
                     beforeChange: function (changes) {
@@ -303,7 +307,8 @@ var socket ="";var roomId ="";
      $('td').click(function(){     
       var row_index = $(this).parent().index();    
       var col_index = $(this).index(); 
-      console.log(row_index+"."+col_index); });
+      // console.log(row_index+"."+col_index); 
+    });
      // $('#formula').on('blur',function(){
 
      // });
