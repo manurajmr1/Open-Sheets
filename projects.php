@@ -3,8 +3,9 @@ include('config.php');
 include('validate_token.php');
 date_default_timezone_set("Asia/Kolkata");
 $today           = date('Y-m-d');
-$loggedUserEmail = "chinchu.kurian@fingent.com";
-$sql    		 = "SELECT * FROM fingent_projects ORDER BY created_on DESC"; 
+$loggedUserEmail = $_SESSION['google_data']['email'];
+$sql    		 = "SELECT fp.id,fp.project_name,fp.created_by,fp.created_on FROM fingent_projects fp LEFT JOIN fingent_project_sheet_shared_users fpss ON fp.id = fpss.project_id 
+					WHERE fp.created_by = '$loggedUserEmail' OR fpss.shared_email = '$loggedUserEmail' ORDER BY fp.created_on DESC"; 
 $query 		     = mysql_query( $sql, $conn );
 $projects			 = [];
 while($row = mysql_fetch_assoc($query)){

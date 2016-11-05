@@ -169,7 +169,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
-                                            Dump data to console
+                                            Save
                                         </button>
                                     </p>
                                     </input>
@@ -479,7 +479,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 }
                                                 sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');">' + value.sheet_name + '</a></li>';
                                             });
-                                            sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
+                                            sheetTabString += '<li ><a data-toggle="tab" href="actions.php?project_id='+project_id+'&action=new_sheet"><b> + </b></a></li>';
                                             $("#sheetlist").html(sheetTabString);
 
                                         }
@@ -498,8 +498,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
               success: function (result) {
                 if(result){
-                  var resultData = $.parseJSON(result);console.log(resultData);
-                  var sheet_name = resultData['sheet_name'];  console.log(sheet_name);
+                  var resultData = $.parseJSON(result);
+                  var sheet_name = resultData['sheet_name']; 
                   $("#sheet_name").val(sheet_name);
                 }
                 
@@ -536,6 +536,22 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
               }
         });
+    }
+    function createNewSheet(){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=new_sheet',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var sheet_name = resultData['project_name']; 
+                  $("#sheet_name").val(sheet_name);
+                }
+                
+
+              }
+      });
     }
     </script>
 </body>
