@@ -196,7 +196,7 @@ var $ = function(id) {
                     }
                     clearTimeout(autosaveNotification);
                     ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) { 
-                      console.log(JSON.stringify({data: change}));
+                      // console.log(JSON.stringify({data: change}));
                        //socket.emit('comment added',{usertext : change});
                       exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                       autosaveNotification = setTimeout(function() {
@@ -215,7 +215,7 @@ var $ = function(id) {
 
                   },
                    beforeSetRangeEnd:function(change, source){
-                    console.log(JSON.stringify({data: change}));
+                    // console.log(JSON.stringify({data: change}));
                     
                  },
                     beforeChange: function (changes) {
@@ -307,7 +307,8 @@ var $ = function(id) {
      $('td').click(function(){     
       var row_index = $(this).parent().index();    
       var col_index = $(this).index(); 
-      console.log(row_index+"."+col_index); });
+      // console.log(row_index+"."+col_index); 
+    });
      // $('#formula').on('blur',function(){
 
      // });
