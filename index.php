@@ -120,13 +120,12 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
+
       <div>
-      
-      <a class="header-title">Fingent Sheets</a>
-      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
-      
-      
-          </div>
+      <a class="header-title" href="projects.php" style="text-decoration:none">Fingent Sheets</a>
+      <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+      </div>
+
     </header>
         
         <div class="wrapper">
@@ -467,6 +466,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                     }
                                     project_id = '<?php echo $project_id; ?>';
+                                    getProjectDetails(project_id);
                                     $.ajax({
                                         url: "actions.php",
                                         type: 'post',
@@ -492,11 +492,21 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 });
 
     function changeSheet(sheet_id){
+
+        $("#sheetlist").find("li").removeClass('active');
+        $("#"+sheet_id).addClass('active');
+
         $.ajax({
               url: "actions.php",
               type: 'post',
               data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
               success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);console.log(resultData);
+                  var sheet_name = resultData['sheet_name'];  console.log(sheet_name);
+                  $("#sheet_name").val(sheet_name);
+                }
+                
 
               }
         });
@@ -514,20 +524,28 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               }
         });
     }
+
     
-    var engine = new Bloodhound({
-  local: [{value: 'red'}, {value: 'blue'}, {value: 'green'} , {value: 'yellow'}, {value: 'violet'}, {value: 'brown'}, {value: 'purple'}, {value: 'black'}, {value: 'white'}],
-  datumTokenizer: function(d) {
-    return Bloodhound.tokenizers.whitespace(d.value);
-  },
-  queryTokenizer: Bloodhound.tokenizers.whitespace
-});
+ 
 
-engine.initialize();
 
-$('#tokenfield-typeahead').tokenfield({
-  typeahead: [null, { source: engine.ttAdapter() }]
-});
+    function getProjectDetails(project_id){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=get_project_details',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var project_name = resultData['project_name']; 
+                  $("#project_name").val(project_name);
+                }
+                
+
+              }
+        });
+    }
+
     </script>
     <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -539,7 +557,7 @@ $('#tokenfield-typeahead').tokenfield({
         <h4 class="modal-title">Share with others</h4>
       </div>
       <div class="modal-body">
-          <input type="text" class="form-control" id="tokenfield-typeahead" value="red,green,blue" />
+          <input type="text" class="form-control" id="tokenfield-typeahead" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
