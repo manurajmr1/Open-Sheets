@@ -127,7 +127,6 @@ function ajax(url, method, params, callback) {
               data: 'sheet_id=1&data='+data_sample ,
               success: function (result) {
 
-
               }
         });
       }
