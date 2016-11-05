@@ -1,5 +1,7 @@
 <!DOCTYPE doctype html>
 <?php
+include('config.php');
+include('validate_token.php');
 $project_id = isset($_GET['project_id'])? $_GET['project_id']:'';
 ?>
 <html>
@@ -39,6 +41,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </script>
         <link href="js/highlight/styles/github.css" media="screen" rel="stylesheet">
         <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom/demo.css">
+        <link rel="stylesheet" href="css/custom/header-basic.css">
+        <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
         <script src="js/ga.js">
         </script>
 
@@ -88,10 +93,30 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                 font-weight: bold;
             }
 
+            .header-title{
+              color:white !important;
+              font-size:20px !important;
+              float:left;
+            }
+            .email-title{
+              color:white;
+              float:right !important;
+            }
+
         </style>
 
     </head>
     <body>
+    <header class="header-basic">
+
+      <!-- <div class="header-limiter">
+        <nav>
+          <a href="#" style="float:left">Fingent Sheets</a>         
+        </nav>
+      </div> -->
+      <a class="header-title">Fingent Sheets</a>
+      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+    </header>
         <div class="wrapper">
             <div class="wrapper-row">
                 <div id="container">
