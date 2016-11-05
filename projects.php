@@ -101,6 +101,11 @@ while($row = mysql_fetch_assoc($query)){
 <!--repeation ends-->
 <hr>
 <div style="margin:50px"></div>
+<div class="container" >
+	<div class="" style="float:right"> 
+		<a class="btn btn-primary" >Create Project</a>
+	</div>
+
 <?php if(count($projects) > 0){?>
 	<?php if(isset($projects['today'])){?>
 
@@ -111,7 +116,7 @@ while($row = mysql_fetch_assoc($query)){
 		</div>
 		<?php foreach($projects['today'] as $project){?>    
 	    	<div class="projects-div" >	
-	 	  		<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+	 	  		<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
 	 	  		<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
 	 	  	</div>	
 		<?php }?>
@@ -130,7 +135,7 @@ while($row = mysql_fetch_assoc($query)){
 		
 		<?php foreach($projects['earlier'] as $project){?>
 		<div class="projects-div">	
-	 	  	<a href="view.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+	 	  	<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
 	 	  	<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>	
  	  	</div>
 		<?php }?>
@@ -142,7 +147,7 @@ while($row = mysql_fetch_assoc($query)){
 <?php }else{?>
 	<div class="container" >No projects</div>
 <?php }?>
-
+</div>
 </body>
 
 </head>
