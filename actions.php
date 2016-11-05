@@ -23,6 +23,9 @@ switch ($action) {
     case 'new_project':
         createNewProject();
         break;
+    case 'new_sheet':
+        createNewSheet($_REQUEST);
+        break;
     default:
         break;
 }
@@ -44,6 +47,7 @@ function saveSheet($data){
 	$sheetData 		= $data['data'];
 	$sheetData		= json_decode($sheetData);
 	$sheetDataText  = $data['data_text'];
+	$sheetDataText  = json_decode($sheetDataText);
 	$created_by		= $_SESSION['google_data']['email'];
 
 
@@ -64,7 +68,7 @@ function saveSheet($data){
 
 		$dataArray[]					= $temp;
 	}
-
+	
 	foreach($sheetDataText as $item){
 
 		$temp['Features'] 				= $item[0];
@@ -80,18 +84,20 @@ function saveSheet($data){
 		$dataTextArray[]				= $temp;
 	}
 
-	$dataArray = json_encode($dataArray);
+	$dataArray 		= json_encode($dataArray);
+	$dataTextArray  = json_encode($dataTextArray);
+
 
 	//$deleteSql    = "DELETE FROM fingent_project_sheet_data WHERE sheet_id = $sheet_id";
 
 	$selectSql  = "SELECT id FROM fingent_project_sheet_data WHERE sheet_id = $sheet_id";
 	$query      = mysql_query($selectSql);
 	if(mysql_num_rows($query) > 0){
-		$updateSql  = "UPDATE fingent_project_sheet_data SET data = '$dataArray',data_text= '$sheetDataText',updated_by = '$created_by',updated_on = NOW() WHERE sheet_id = $sheet_id";
+		$updateSql  = "UPDATE fingent_project_sheet_data SET data = '$dataArray',data_text= '$dataTextArray',updated_by = '$created_by',updated_on = NOW() WHERE sheet_id = $sheet_id";
 		mysql_query($updateSql);
 
 	}else{
-		$insertSql 	= "INSERT INTO fingent_project_sheet_data (sheet_id,data,data_text,created_by,created_on) VALUES('$sheet_id','$dataArray','$sheetDataText','$created_by',NOW())";
+		$insertSql 	= "INSERT INTO fingent_project_sheet_data (sheet_id,data,data_text,created_by,created_on) VALUES('$sheet_id','$dataArray','$dataTextArray','$created_by',NOW())";
 		mysql_query($insertSql);	
 	}
 	if(mysql_affected_rows() > 0){
@@ -108,7 +114,7 @@ function saveSheet($data){
 function getSheetData($data,$type){
 	$sheet_id 		= $data['sheet_id'];
 
-	$sql 	= "SELECT fps.sheet_name,fpsd.data FROM fingent_project_sheet_data fpsd INNER JOIN fingent_project_sheets fps ON fps.id = fpsd.sheet_id WHERE fpsd.sheet_id = $sheet_id ";
+	$sql 	= "SELECT fps.sheet_name,fpsd.data,fpsd.data_text FROM fingent_project_sheet_data fpsd INNER JOIN fingent_project_sheets fps ON fps.id = fpsd.sheet_id WHERE fpsd.sheet_id = $sheet_id ";
 	$query 	= mysql_query($sql);
 	if(mysql_num_rows($query) > 0){
 		$result = mysql_fetch_assoc($query);
@@ -122,7 +128,7 @@ function getSheetData($data,$type){
 			$returnArray['sheet_name'] = $result['sheet_name']; 
 			echo json_encode($returnArray);exit;
 		}else{
-			echo $result['data'];exit; 
+			echo $result['data_text'];exit; 
 		}	
 	}else{
 		echo "";exit;
@@ -163,6 +169,22 @@ function createNewProject(){
 	$returnArray['sheet_id']        = $sheet_id;
 	$returnArray['sheet_name']		= 'sheet 1';*/
 
+	header("location:index.php?project_id=$project_id");
+
+}
+
+function createNewSheet($data){
+	$project_id = $data['project_id'];
+	$sql = "SELECT id FROM fingent_project_sheets WHERE project_id = $project_id ";
+	$query = mysql_query($sql);
+	$count = mysql_num_rows($query);
+	$count = $count +1;
+	$created_by = $_SESSION['google_data']['email'];
+	$sheet_name = 'sheet '.$count;
+
+	$insertSql = "INSERT INTO fingent_project_sheets (project_id,sheet_name,created_by,created_on) VALUES('$project_id','$sheet_name','$created_by',NOW())";
+	mysql_query($insertSql);
+	
 	header("location:index.php?project_id=$project_id");
 
 }
