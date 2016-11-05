@@ -557,7 +557,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         <h4 class="modal-title">Share with others</h4>
       </div>
       <div class="modal-body">
-          <input type="text" class="form-control" id="tokenfield-typeahead" />
+          <input type="text" name="shares" data-role="tagsinput" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
