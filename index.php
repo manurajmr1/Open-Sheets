@@ -107,7 +107,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               padding:5px;
               float:left
             }
-
+            
+            input {height:30px}
         </style>
 
     </head>
@@ -127,6 +128,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
       
           </div>
     </header>
+        
         <div class="wrapper">
             <div class="wrapper-row">
                 <div id="container" style="widht:100%;">
@@ -140,7 +142,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     Sheet Name : <input  type="text" name="sheet_name" id="sheet_name" value="">
                                     </div>
                                     <div style="float:right">
-                                        <input type="button" value="Share 1" class="btn-info btn-md">
+                                        <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
                                 </div></div>
                                     <!-- <p>
                                         <button id="load" name="load">
@@ -396,7 +398,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
     </script>
   <!--  <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
@@ -510,6 +514,39 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               }
         });
     }
+    
+    var engine = new Bloodhound({
+  local: [{value: 'red'}, {value: 'blue'}, {value: 'green'} , {value: 'yellow'}, {value: 'violet'}, {value: 'brown'}, {value: 'purple'}, {value: 'black'}, {value: 'white'}],
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace
+});
+
+engine.initialize();
+
+$('#tokenfield-typeahead').tokenfield({
+  typeahead: [null, { source: engine.ttAdapter() }]
+});
     </script>
+    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share with others</h4>
+      </div>
+      <div class="modal-body">
+          <input type="text" class="form-control" id="tokenfield-typeahead" value="red,green,blue" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
