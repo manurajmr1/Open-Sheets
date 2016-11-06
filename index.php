@@ -105,10 +105,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
             }
             .usertext{
               padding:5px;
-              float:left
             }
-            
-            input {height:30px}
+
         </style>
 
     </head>
@@ -120,14 +118,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
-
-      <div>
-      <a class="header-title" href="projects.php" style="text-decoration:none">Fingent Sheets</a>
-      <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
-      </div>
-
+      <a class="header-title">Fingent Sheets</a>
+      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
     </header>
-        
         <div class="wrapper">
             <div class="wrapper-row">
                 <div id="container" style="widht:100%;">
@@ -135,18 +128,11 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
-                                    <div style="overflow: auto;padding:5px;">
-                                    <div class="usertext ">
-                                    Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
-                                    Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">
+                                    <div class="usertext">
+                                    Project Name : <input type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
+                                    Sheet Name : <input type="text" name="sheet_name" id="sheet_name" value="">
                                     </div>
-
-                                    <p style="display:none;">
-
-                                    <div style="float:right">
-                                        <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
-                                </div></div>
-                                    
+                                    <!-- <p>
                                         <button id="load" name="load">
                                             Load
                                         </button>
@@ -158,7 +144,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             Autosave
                                             </input>
                                         </label>
-                                    </p>
+                                    </p> -->
                                     <!-- <input id="formula" name="formula" type="text" value="">
                                     <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
                                     <div class="tabbable tabs-below" >
@@ -174,57 +160,13 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
-                                            Save
+                                            Dump data to console
                                         </button>
                                     </p>
                                     </input>
                                 </div>
                             </div>
-                             <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                             <script data-jsfiddle="example1">
-
-                            $(document).ready(function () { alert(1);
-                                var sheetval='';
-                               var project_id = '<?php echo $project_id; ?>';
-                                    $.ajax({
-                                        url: "actions.php",
-                                        type: 'post',
-                                        async :false,
-                                        data: 'project_id=' + project_id + '&action=get_sheets',
-                                        success: function (result) {
-                                            var sheetData = $.parseJSON(result);
-                                            sheetsArray  =  sheetData;
-                                            var sheetTabString = '';
-                                            $.each(sheetData, function (key, value) {
-                                                sheetClass = '';
-                                                if (key == 0) {
-                                                    sheetClass = ' class="active "';
-                                                    $("#sheet_name").val(value.sheet_name);
-                                                    sheetval=value.sheet_id; 
-                                                }
-                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');" style="cursor:pointer">' + value.sheet_name + '</a></li>';
-                                            });
-                                            sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
-                                            $("#sheetlist").html(sheetTabString);
-
-                                        }
-                                    });
-                                    getProjectDetails(project_id);
-
-
-                                 // var sheet_id=$("#sheetlist li.active").attr('id');
-                                 
-                                    $.ajax({
-                                              url: "actions.php",
-                                              type: 'post',
-                                              data: 'action=get_sheet_data&sheet_id='+sheetval,
-                                              success: function (result) {
-                                                    console.log("result="+result);
-                                              }
-                                        });
-                                    });
-                                 
                                 var recieve = true;
                                 var row = "";
                                 var col = "";
@@ -311,6 +253,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 }
 
 
+
                                 hot = new Handsontable(container, {
                                     data: data1,
                                     startRows: 0,
@@ -346,15 +289,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             return;
                                         }
                                         clearTimeout(autosaveNotification);
-                                        var sheet_id=$("#sheetlist li.active").attr('id');
                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
                                             if (recieve) {// alert(change);
-                                                //socket.emit('comment added', {usertext: change,sheetid : sheet_id});
+                                                //socket.emit('comment added', {usertext: change});
                                             }
-                                         /*   //exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
+                                            exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                                             autosaveNotification = setTimeout(function () {
                                                 exampleConsole.innerText = 'Changes will be autosaved';
-                                            }, 1000);*/
+                                            }, 1000);
                                         });
                                     },
                                     afterCreateRow: function (index, amount) {
@@ -369,9 +311,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     },
                                     beforeSetRangeEnd: function (change, source) {
                                         console.log(JSON.stringify({data: change}));
-                                        var sheet_id=$("#sheetlist li.active").attr('id');
-                                        // alert($("#sheetlist li.active").attr('id'));
-                                        //socket.emit('comment added', {usertext: change,sheetid : sheet_id});
+                                        //socket.emit('comment added', {usertext: change});
                                         recieve = true;
                                     },
                                     beforeChange: function (changes) {
@@ -389,10 +329,20 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         //        console.log(hot.getData()[r][prop]);
                                         if (r === 51)
                                             cellProperties.readOnly = true;
+                                        // cellProperties.renderer = firstRowRenderer;
                                         return cellProperties;
                                     }
 
                                 });
+
+                                /*     function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
+                                 Handsontable.renderers.TextRenderer.apply(this, arguments);
+                                 if((!value || value === '' || value == null) && col=='3' && row=='4') {  console.log(col);                       
+                                 //       td.innerHTML = "0";
+                                 } 
+                                 
+                                 }
+                                 */
                                 //     resetState = document.querySelector('.reset-state');
                                 stateLoaded = document.querySelector('.state-loaded');
 
@@ -447,9 +397,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
     </script>
 
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
+    <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script language="JavaScript">
                                 var socket = "";
                                 var roomId = "";
@@ -459,21 +409,38 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 $(document).ready(function () {
 
                                     /*socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
-                                    var sheet_id1=$("#sheetlist li.active").attr('id');
                                     socket.on('notifyeveryone', function (msg) {
                                         //  console.log("event" + JSON.stringify(msg));
                                         // alert(JSON.stringify(msg));
-                                        //alert(msg.id);
-                                        if(msg.id == sheet_id1){
-                                            notifyMe(msg);    
-                                        }
-                                        
+                                        notifyMe(msg);
 
                                         recieve = false;
                                     });*/
+                                    project_id = '<?php echo $project_id; ?>';
+                                    $.ajax({
+                                        url: "actions.php",
+                                        type: 'post',
+                                        data: 'project_id=' + project_id + '&action=get_sheets',
+                                        success: function (result) {
+                                            var sheetData = $.parseJSON(result);
+                                            sheetsArray  =  sheetData;
+                                            var sheetTabString = '';
+                                            $.each(sheetData, function (key, value) {
+                                                sheetClass = '';
+                                                if (key == 0) {
+                                                    sheetClass = ' class="active "';
+                                                    $("#sheet_name").val(value.sheet_name);
+                                                }
+                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');">' + value.sheet_name + '</a></li>';
+                                            });
+                                            sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
+                                            $("#sheetlist").html(sheetTabString);
 
+                                        }
+                                    });
+                                    getProjectDetails(project_id);
                                     function notifyMe(data) {// alert(1);
-                                        var res = data; 
+                                        var res = data;
                                         console.log(JSON.stringify(res));
                                         $.each(res.user, function (k, v) {
 
@@ -507,7 +474,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             $('#example1 td').each(function (key, val) {
                                                 var index = ((row) * 9) + (col); //console.log(key+'-gg-'+index);
                                                 if (key == index) {
-                                                
+
 
                                                     $(this).css('border', '1px solid red');
                                                 } else {
@@ -518,27 +485,18 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             });
                                         });
 
-                                        
+
                                     }
+                                    
 
                                 });
 
     function changeSheet(sheet_id){
-
-        $("#sheetlist").find("li").removeClass('active');
-        $("#"+sheet_id).addClass('active');
-
         $.ajax({
               url: "actions.php",
               type: 'post',
               data: 'sheet_id='+sheet_id+'&action=get_sheet_data',
               success: function (result) {
-                if(result){
-                  var resultData = $.parseJSON(result);
-                  var sheet_name = resultData['sheet_name']; 
-                  $("#sheet_name").val(sheet_name);
-                }
-                
 
               }
         });
@@ -556,64 +514,22 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               }
         });
     }
+    function getProjectDetails(project_id) {
+                                                    $.ajax({
+                                                        url: "actions.php",
+                                                        type: 'post',
+                                                        data: 'project_id=' + project_id + '&action=get_project_details',
+                                                        success: function (result) {
+                                                            if (result) {
+                                                                var resultData = $.parseJSON(result);
+                                                                var project_name = resultData['project_name'];
+                                                                $("#project_name").val(project_name);
+                                                            }
 
-    
- 
 
-
-    function getProjectDetails(project_id){
-      $.ajax({
-              url: "actions.php",
-              type: 'post',
-              data: 'project_id='+project_id+'&action=get_project_details',
-              success: function (result) {
-                if(result){
-                  var resultData = $.parseJSON(result);
-                  var project_name = resultData['project_name']; 
-                  $("#project_name").val(project_name);
-                }
-                
-
-              }
-        });
-    }
-
-    function createNewSheet(){
-      $.ajax({
-              url: "actions.php",
-              type: 'post',
-              data: 'project_id='+project_id+'&action=new_sheet',
-              success: function (result) {
-                if(result){
-                  var resultData = $.parseJSON(result);
-                  var sheet_name = resultData['project_name']; 
-                  $("#sheet_name").val(sheet_name);
-                }
-                
-
-              }
-      });
-    }
-
+                                                        }
+                                                    });
+                                                }
     </script>
-    <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Share with others</h4>
-      </div>
-      <div class="modal-body">
-          <input type="text" name="shares" data-role="tagsinput" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 </body>
 </html>
