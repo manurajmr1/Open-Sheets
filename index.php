@@ -106,6 +106,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
             }
             .usertext{
               padding:5px;
+              float:left;
             }
 
         </style>
