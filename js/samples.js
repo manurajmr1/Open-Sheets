@@ -145,7 +145,7 @@ function ajax(url, method, params, callback) {
         var instance = element.getAttribute('data-instance');
         var hot = window[instance];
         var array=['A','B','C','D','E','F','G','H','I'];
-          var data_sample=JSON.stringify(hot.getData()); console.log('data of '+ data_sample);
+         // var data_sample=JSON.stringify(hot.getData()); console.log('data of '+ data_sample);
           var json_array=[];var jarr=[];
           $.each(hot.getData(), function (k, v) { 
            var append_data=[];

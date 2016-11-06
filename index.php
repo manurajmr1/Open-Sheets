@@ -142,21 +142,12 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         <p style="display:none;">
 
-                                        <div style="float:right">
-                                            <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
-                                        </div></div>
+                                                <div style="float:right">
+                                                    <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                                     <input type="button" value="Export" class="btn-info btn-md"  onclick="export_sheet();">
+                                                </div></div>
 
-                                    <button id="load" name="load">
-                                        Load
-                                    </button>
-                                    <button id="save" name="save">
-                                        Save
-                                    </button>
-                                    <label>
-                                        <input autocomplete="off" checked="checked" id="autosave" name="autosave" type="checkbox">
-                                        Autosave
-                                        </input>
-                                    </label>
+                                           
                                     </p>
                                     <!-- <input id="formula" name="formula" type="text" value="">
                                     <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
@@ -165,25 +156,25 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             <div id="example1" style="height:750px;widht:100%;">
                                             </div>
                                         </div> 
+                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
+                                            save
+                                        </button>
                                         <ul class="nav nav-tabs" id="sheetlist">
                                             <!-- <li><a href="" data-toggle="tab">One</a></li>
                                             <li><a href="" data-toggle="tab">Two</a></li>
                                             <li><a href="" data-toggle="tab">Twee</a></li> -->
                                         </ul>                                         
                                     </div> 
-                                    <p>
-                                        <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
-                                            Save
-                                        </button>
-                                    </p>
+                                   
                                     </input>
                                 </div>
                             </div>
                             <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                             <script data-jsfiddle="example1">
-                                var flag = true;var data1 ='';var g='';
+                                var flag = true;var data1 ='';var g='';var sheet_id = '';
                                                 $(document).ready(function () {
+                                                    sheet_id = $("#sheetlist li.active").attr('id');
                                                     var sheetval = '';
                                                     var project_id = '<?php echo $project_id; ?>';
                                                     $.ajax({
@@ -211,30 +202,35 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     });
 
 
-                                                    // var sheet_id=$("#sheetlist li.active").attr('id');
-                                                    
-                                                    $.ajax({
+                                            /*        $.ajax({
                                                         url: "actions.php",
                                                         type: 'post',
-                                                        data: 'action=get_sheet_data&sheet_id=' + sheetval,
-                                                        success: function (result) {
-                                                             var val = jQuery.parseJSON(result); //console.log("result=" + JSON.stringify(val.datas));
-                                                            var new_val=JSON.stringify(val.datas);
+                                                        async:false,
+                                                        data: 'action=get_sheet_data&sheet_id=' + sheet_id,
+                                                        success: function (result) {  
+                                                            var new_val='';
+                                                            if(result){
+                                                            var val = jQuery.parseJSON(result); console.log("resultyyy=" + val.datas);
+                                                             new_val=val.datas;
+                                                            }
+
+
+                                                          
                                                             if (new_val) { 
                                                                 var g=new_val; 
                                                                 data1 = new_val;
+                                                                load();
                                                                 flag = false;
+                                                            }else{
+                                                                  
+                                                // load();
                                                             }
 
                                                         }
-                                                    });
+                                                    });*/
                                                 });
-    
-                                                var recieve = true;
-                                                var row = "";
-                                                var col = "";
-                                                if(flag){
-                                                         data1 = [
+
+ data1 = [
                                                     ['Features', 'Notes', 'Code and Unit Testing', 'Design', 'Testing and Debugging', 'BA', 'Total', 'Buffered', 'Effort'],
                                                     ["", "", 0, "=C2*20/100", "=C2*30/100", "=C2*25/100", "=SUM(C2:F2)", "=SUM(C2:F2)", '=IF(H2>80,"H",(IF(H2>8,"M","L")))'],
                                                     ["", "", 0, "=C3*20/100", "=C3*30/100", "=C3*25/100", "=SUM(C3:F3)", "=SUM(C3:F3)", '=IF(H3>80,"H",(IF(H3>8,"M","L")))'],
@@ -289,10 +285,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     ["Total", "", 0, "=SUM(C2:C51)", "=SUM(D2:D51)", "=SUM(E1:E51)", "=SUM(F1:F51)", "=SUM(G1:G51)", ""]
 
                                                 ];
-                                                }
-                                                
-                                               
-                                                var $ = function (id) {
+    
+                                                var recieve = true;
+                                                var row = "";
+                                                var col = "";
+
+                                                // function load(){
+
+                                                     var $ = function (id) {
                                                     return document.getElementById(id);
                                                 },
                                                         container = $('example1'),
@@ -354,7 +354,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                             return;
                                                         }
                                                         clearTimeout(autosaveNotification);
-                                                        var sheet_id = $("#sheetlist li.active").attr('id');
+                                                        
                                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
                                                             if (recieve) {// alert(change);
                                                                 socket.emit('comment added', {usertext: change, sheetid: sheet_id});
@@ -376,8 +376,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                                     },
                                                     beforeSetRangeEnd: function (change, source) {
-                                                        console.log(JSON.stringify({data: change}));
-                                                        var sheet_id = $("#sheetlist li.active").attr('id');
+                                                        console.log(JSON.stringify({data: change}));var sheet_id =1;
+                                                       // var sheet_id = $("#sheetlist li.active").attr('id'); alert(sheet_id);
                                                         // alert($("#sheetlist li.active").attr('id'));
                                                         socket.emit('comment added', {usertext: change, sheetid: sheet_id});
                                                         recieve = true;
@@ -446,6 +446,10 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                         exampleConsole.innerText = 'Changes will not be autosaved';
                                                     }
                                                 });
+
+                                                // }
+                                               
+                                               
                             </script>
                         </div>
                     </div>
@@ -601,6 +605,11 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                                         }
                                                     });
+                                                }
+
+                                                function export_sheet(){
+                                                  var sheet_id = $("#sheetlist li.active").attr('id');
+                                                  window.location = "http://localhost:1111/create_excel/"+sheet_id;
                                                 }
 
     </script>
