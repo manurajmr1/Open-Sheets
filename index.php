@@ -210,6 +210,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         }
                                     });
+                                    getProjectDetails(project_id);
 
 
                                  // var sheet_id=$("#sheetlist li.active").attr('id');
@@ -517,7 +518,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             });
                                         });
 
-
+                                        
                                     }
 
                                 });
