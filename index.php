@@ -203,7 +203,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     $("#sheet_name").val(value.sheet_name);
                                                     sheetval=value.sheet_id; 
                                                 }
-                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');">' + value.sheet_name + '</a></li>';
+                                                sheetTabString += '<li id="' + value.sheet_id + '" ' + sheetClass + ' ><a  data-toggle="tab" onclick="changeSheet('+value.sheet_id+');" style="cursor:pointer">' + value.sheet_name + '</a></li>';
                                             });
                                             sheetTabString += '<li ><a href="" data-toggle="tab"><b>+</b></a></li>';
                                             $("#sheetlist").html(sheetTabString);

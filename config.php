@@ -2,7 +2,7 @@
 
 error_reporting( ~E_ALL & ~E_NOTICE );
 
-$conn = mysql_connect('localhost', 'root', '');
+$conn = mysql_connect('localhost', 'root', 'my$ql');
 
 
 if (!$conn) {
