@@ -304,7 +304,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                         autosaveNotification,
                                                         hot;
                                                 function update_last_row() {
-
+                                                    
                                                     console.log(data1.length);
                                                 }
                                                 function isEmptyRow(instance, row) {
@@ -704,6 +704,17 @@ Loading demo dependencies. They are used here only to enhance the examples on th
     }
 
     </script>
+    <style>
+        .fade {
+opacity: 2;
+-webkit-transition: opacity 0.15s linear;
+transition: opacity 0.15s linear;
+}
+.fade.in {
+opacity: 2;
+}
+        </style>
+    
     <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
