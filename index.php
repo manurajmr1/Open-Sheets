@@ -122,7 +122,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
           <a href="#" style="float:left">Fingent Sheets</a>         
         </nav>
       </div> -->
-      <a class="header-title">Fingent Sheets</a>
+      <a class="header-title" href="projects.php">Fingent Sheets</a>
       <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
     </header>
         <div class="wrapper">
