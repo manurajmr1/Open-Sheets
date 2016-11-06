@@ -4,6 +4,8 @@
 include('config.php');
 include('validate_token.php');
 $project_id = isset($_GET['project_id'])? $_GET['project_id']:'';
+$ip = $_SERVER['HTTP_HOST'];
+$exportUrl = "http://".$ip.":1111/create_excel/1";
 ?>
 <html>
     <head> 
@@ -140,6 +142,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         <div style="float:right">
                                             <input type="button" value="Share" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                            <input type="button" value="Export" class="btn-info btn-md"  window.location.href="<?php echo $exportUrl; ?>">
                                         </div></div>
 
                                     
@@ -159,7 +162,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </div> 
                                     <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
-                                            Dump data to console
+                                            save
                                         </button>
                                     </p>
                                     </input>
