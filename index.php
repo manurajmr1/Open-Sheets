@@ -129,23 +129,20 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
-                                    <div class="usertext">
-                                    Project Name : <input type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()"><br>
-                                    Sheet Name : <input type="text" name="sheet_name" id="sheet_name" value="">
-                                    </div>
-                                    <!-- <p>
-                                        <button id="load" name="load">
-                                            Load
-                                        </button>
-                                        <button id="save" name="save">
-                                            Save
-                                        </button>
-                                        <label>
-                                            <input autocomplete="off" checked="checked" id="autosave" name="autosave" type="checkbox">
-                                            Autosave
-                                            </input>
-                                        </label>
-                                    </p> -->
+
+                                    <div style="overflow: auto;padding:5px;">
+                                        <div class="usertext ">
+                                            Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
+                                            Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">
+                                        </div>
+
+
+                                        <div style="float:right">
+                                            <input type="button" value="Share" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                        </div></div>
+
+                                    
+
                                     <!-- <input id="formula" name="formula" type="text" value="">
                                     <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
                                     <div class="tabbable tabs-below" >
