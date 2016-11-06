@@ -24,8 +24,13 @@
                     </script>
                     <script data-jsfiddle="common" src="rules/src/handsontable.formula.js">
                     </script>
-                     <script src="js/autofill.js">
-                            </script>
+                    <script data-jsfiddle="common" src="js/parser.js">
+                    </script>
+                    <script data-jsfiddle="common" src="js/ruleJs.js">
+                    </script>
+                    <script src="js/autofill.js">
+                    </script>
+
                     <link href="rules/src/handsontable.formula.css" media="screen" rel="stylesheet">
                         <!-- arun -->
                         <!--
@@ -40,6 +45,7 @@
                                 <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
                                     <script src="js/ga.js">
                                     </script>
+
                                     <!-- <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script language="JavaScript">
@@ -74,6 +80,11 @@ var socket ="";var roomId ="";
         </meta>
     </head>
     <body>
+        <style>
+            .total_col{
+      width : 100px;
+      }
+        </style>
         <div class="wrapper">
             <div class="wrapper-row">
                 <div id="container">
@@ -100,6 +111,134 @@ var socket ="";var roomId ="";
                                         <pre class="console" id="example1console">Click "Load" to load data from server</pre>
                                         <div id="example1">
                                         </div>
+                                        <div class="jumbotron" style="float:left;width:100%">
+                                            <table style="float:left;width:50%">
+                                                <tr>
+                                                    <th>
+                                                        Domain
+                                                    </th>
+                                                    <th>
+                                                        Estimate
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Code and Unit Testing
+                                                    </td>
+                                                    <td class="estimate_value" id="dev_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Design
+                                                    </td>
+                                                    <td class="estimate_value" id="design_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Testing and Debugging
+                                                    </td>
+                                                    <td class="estimate_value" id="testing_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        BA
+                                                    </td>
+                                                    <td class="estimate_value" id="ba_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td class="estimate_value" id="total_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Buffered
+                                                    </td>
+                                                    <td class="estimate_value" id="buffer_val">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                             <table style="float:right;width:50%">
+                                                <tr>
+                                                    <th>
+                                                        Domain
+                                                    </th>
+                                                    <th>
+                                                        Estimate
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Design
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                       <input type="text"  data-id="3" data-attr="d" class="estimate_text numeric" value="25" id="design_val_text" >
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Testing and Debugging
+                                                    </td>
+                                                    <td class="estimate_text_td" >
+                                                       <input type="text"  data-id="4" data-attr="e" class="estimate_text numeric" value="40" id="testing_val_text" >
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        BA
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                        <input type="text"  data-id="5" data-attr="f" class="estimate_text numeric" value ="40" id="ba_val_text" >
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                       <input type="text"  data-id="6" data-attr="g" class="estimate_text" id="total_val_text" >
+                                                    </td>
+                                                </tr> -->
+                                                <tr>
+                                                    <td>
+                                                        Buffered
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                        <input type="text"  data-id="7" data-attr="h" class="estimate_text numeric" value="30" id="buffer_val_text" >
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        High
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                        <input type="text"  data-id="8" data-attr="i" class="range_text numeric" value="80" id="high_val_text" >
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        Low
+                                                    </td>
+                                                    <td class="estimate_text_td">
+                                                        <input type="text"  data-id="8" data-attr="i" class="range_text numeric" value="8" id="low_val_text" >
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div>
+                                        </div>
                                         <p>
                                             <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
                                                 Dump data to console
@@ -109,11 +248,12 @@ var socket ="";var roomId ="";
                                 </div>
                             </div>
                             <script data-jsfiddle="example1">
+
                                 var data1 =  [
-                            ["login", 10, 15, 14, 13,"11","=C2/B2","22","33"],
-                            ["feature1", 10, 11, 12, 13,"11","=C2/B2","22","33"],
-                            ["feature2", 20, 11, 14, 13,"11","=C2/B2","22","33"],
-                            ["Total:", 30, 15, 12, 13,"11","=C2/B2","22","33"]
+                            ["login", 0, 0, "=C1*0%", "=C1*0%","=C1*0%","=SUM(C1:F1)","=G1","=IF(H1>100,'H',(IF(H1>10,'M','L')))"],
+                            ["login", 0, 0, "=C2*0%", "=C2*0%","=C2*0%","=SUM(C2:F2)","=G2","=IF(H2>100,'H',(IF(H2>10,'M','L')))"],
+                            ["login", 0, 0, "=C3*0%", "=C3*0%","=C3*0%","=SUM(C3:F3)","=G3","=IF(H3>100,'H',(IF(H3>10,'M','L')))"],
+                            ["login", 0, 0, "=C4*0%", "=C4*0%","=C4*0%","=SUM(C4:F4)","=G4","=IF(H4>100,'H',(IF(H4>10,'M','L')))"],
                             // ["", "", "", "", "","","","",""]
                           ];
                 var total_row = data1.length;
@@ -125,13 +265,12 @@ var socket ="";var roomId ="";
                   container = $('example1'),
                   exampleConsole = $('example1console'),
                   autosave = $('autosave'),
+                  formulatext = $('formula'),
                   load = $('load'),
                   save = $('save'),
                   autosaveNotification,
                   hot;
                   function update_last_row(){
-
-                    console.log(data1.length);
                   }
                   function isEmptyRow(instance, row) {
                   var rowData = instance.getData()[row];
@@ -144,45 +283,12 @@ var socket ="";var roomId ="";
 
                   return true;
                 }
-                      function RowRenderer(){
-                      var highlightedRow = null;
-                      
-                      return {
-                          getRenderFunction: function(){
-                              return function(instance, td, row, col, prop, value, cellProperties){
-                                  Handsontable.TextRenderer.apply(this, arguments);
-                                  if(cellProperties.readOnly===true){
-                                    remove_row = row;
-                                    // var hot1 = new Handsontable(document.getElementById('example1'));
-                                    // 1.alter('remove_row', 2);
-                                    // $('#example1').handsontable('setDataAtCell',row, col, 10000);
-                                    // var instance = $container.handsontable('getInstance');
-                                    // $('#example1').handsontable("alter","remove_row",1);
-                                     // cellProperties.instance.alter('remove_row',1,1);
-                                   // cellProperties.instance.spliceRow.apply(cellProperties.instance, row);
-                                    // cellProperties.instance.clear();
-                                    // cellProperties.destroy;
-                                  }
-                               //   cellProperties.readOnly =false;
-                                  if(cellProperties.readOnly!='undefined'){
 
-                                  }
-                                  if(row == total_row-1){
-
-                                      td.style['background-color'] = '#ccc';
-                                  }
-                                  return td;
-                              }
-                          }
-                      }
-                  }  
-
-    var rowRenderer = new RowRenderer();
 
                 hot = new Handsontable(container, {
                   data: data1,
-                  // startRows: 15,
-                  // startCols: 20,
+                  startRows: 15,
+                  startCols: 20,
                   rowHeaders: true,
                   colHeaders: true,
                   minRows:5,
@@ -197,11 +303,11 @@ var socket ="";var roomId ="";
                   autoInsertRow:false,
                   manualColumnFreeze: true,
                   fixedRowsTop: 2,
-                  fixedColumnsLeft: 2,
+                  fixedColumnsLeft: 0,
                    comments: true,
                    formulas: true,
-                   colHeaders: ['Features', 'Notes', 'Code and Unit Testing', 'Design','Testing and Debugging',
-'BA','Total','Buffered','Effort'],
+                   // colHeaders: ['Features', 'Notes', 'Code and Unit Testing', 'Design','Testing and Debugging',
+// 'BA','Total','Buffered','Effort'],
                     // columns: [
                     //   {
                     //     data: 'Features',
@@ -226,13 +332,13 @@ var socket ="";var roomId ="";
                    currentRowClassName: 'currentRow',
                   currentColClassName: 'currentCol',
                    cells: function (row, col, prop) {
-                    var cellProperties = {};
-                    cellProperties.renderer = rowRenderer.getRenderFunction(); 
-                    if (row === total_row - 1) {
-                      cellProperties.readOnly = true;
+                    // var cellProperties = {};
+                    // cellProperties.renderer = rowRenderer.getRenderFunction(); 
+                    // if (row === total_row - 1) {
+                    //   cellProperties.readOnly = true;
 
                       
-                    }
+                    // }
                     // if (row === total_row) {
                     //   cellProperties.renderer = firstRowRenderer; // uses function directly
                     // }
@@ -240,9 +346,15 @@ var socket ="";var roomId ="";
                     //   cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
                     // }
                 
-                    return cellProperties;
+                    // return cellProperties;
                   },
                   afterChange: function (change, source) {
+                    if(change!=null){
+                       var col_vals = {2:'c',3:'d',4:'e',5:'f',6:'g',7:'h',8:'i'};
+                      var ref_col = change[2];
+                      var ref_col_val = col_vals.ref_col;
+                      // update_cells(ref_col_val, ref_col);
+                    }
                     if (source === 'loadData') {
                       return; //don't save this change
                     }
@@ -251,7 +363,6 @@ var socket ="";var roomId ="";
                     }
                     clearTimeout(autosaveNotification);
                     ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) { 
-                      console.log(JSON.stringify({data: change}));
                        //socket.emit('comment added',{usertext : change});
                       exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                       autosaveNotification = setTimeout(function() {
@@ -259,18 +370,20 @@ var socket ="";var roomId ="";
                       }, 1000);
                     });
                   },
-                   afterCreateRow:function(index,amount){
-                      total_row++;
-                  // console.log(index+' '+amount);
+                  //  afterCreateRow:function(index,amount){
+                  //   total_row++;
+                  //   console.log(total_row);
+                  //     // update_after_insert(index,amount);
+                 
 
-                  },afterRemoveRow:function(index,amount){
-                      total_row--;
-                  },beforeKeyDown:function(changes){
+                  // },afterRemoveRow:function(index,amount){
+                  //     total_row--;
+                  // },
+                  beforeKeyDown:function(changes){
                   //  alert(2);
 
                   },
                    beforeSetRangeEnd:function(change, source){
-                    console.log(JSON.stringify({data: change}));
                     
                  },
                  onSelection: function(row, col, row2, col2) {
@@ -314,6 +427,23 @@ var socket ="";var roomId ="";
                     }*/
                   }
                 });
+                hot.updateSettings({ 
+                    afterCreateRow:function(index,amount){
+                      total_row++;
+                      // console.log(amount+"total_row"+total_row);
+                      // insert_new_row(index);
+                    //   if(change!=null){
+                    //    var col_vals = {2:'c',3:'d',4:'e',5:'f',6:'g',7:'h',8:'i'};
+                    //   var ref_col = change[2];
+                    //   var ref_col_val = col_vals.ref_col;
+                    insert_new_row(index);
+                    // }
+                 
+
+                  },afterRemoveRow:function(index,amount){
+                      total_row--;
+                  }
+                });
               resetState = document.querySelector('.reset-state');
               stateLoaded = document.querySelector('.state-loaded');
 
@@ -325,7 +455,7 @@ var socket ="";var roomId ="";
                   manualColumnResize: true
                 });
                 stateLoaded.style.display = 'none';
-                hot.render();
+                hot.render();getCellMeta
               });
 
               hot.runHooks('persistentStateLoad', '_persistentStateKeys', storedData);
@@ -353,15 +483,16 @@ var socket ="";var roomId ="";
                   });
                 });
 
-                Handsontable.Dom.addEvent(autosave, 'click', function() {
-                  if (autosave.checked) {
-                    exampleConsole.innerText = 'Changes will be autosaved';
-                  }
-                  else {
-                    exampleConsole.innerText ='Changes will not be autosaved';
-                  }
+
+                Handsontable.Dom.addEvent(formulatext, 'click', function() {
+                  alert("Sfd");
+                  // if (autosave.checked) {
+                  //   exampleConsole.innerText = 'Changes will be autosaved';
+                  // }
+                  // else {
+                  //   exampleConsole.innerText ='Changes will not be autosaved';
+                  // }
                 });
-               
                             </script>
                         </div>
                     </div>
@@ -370,19 +501,30 @@ var socket ="";var roomId ="";
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
         </script>
+        <script src="js/custom.js"></script>
         <script language="JavaScript">
             $(document).ready(function(){
 $('#example1').on('click', 'td', function() {
-// $('td').click(function(){     
-     var row_index = $(this).parent().index();    
-     var col_index = $(this).index(); 
+// // $('td').click(function(){     
+//      var row_index = $(this).parent().index();    
+//      var col_index = $(this).index(); 
 
-     console.log(row_index+"."+col_index+' '+total_row); 
-       data = hot.plugin.helper.cellValue ('D1'); console.log(data);
-       hot.setDataAtCell(total_row - 1, col_index-1, 100);
-    // $('#formula').on('blur',function(){
+//      console.log(row_index+"."+col_index+' '+total_row); 
+//        data = hot.plugin.helper.cellValue ('D1'); console.log(data);
+//        hot.setDataAtCell(total_row - 1, col_index-1, 100);
+//     // $('#formula').on('blur',function(){
 
      });
+ $('#container').on('click', '#autosave', function() {
+                // Handsontable.Dom.addEvent(autosave, 'click', function() {
+                  alert("Sdf");
+                  if (autosave.checked) {
+                    exampleConsole.innerText = 'Changes will be autosaved';
+                  }
+                  else {
+                    exampleConsole.innerText ='Changes will not be autosaved';
+                  }
+                });
 });
         </script>
     </body>

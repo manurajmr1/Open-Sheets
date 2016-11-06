@@ -114,8 +114,9 @@ var socket ="";var roomId ="";
                               <input type="textfield" id="buffered" value="0" style="display: none" />
 <script data-jsfiddle="example1">
 
-  var data1 = [{Features:"login", price: 25, Notes: "login to", Code_and_Unit_Testing: 10, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:50,Effort:20},{Features:"feature1", price: 74.99, Notes: "feature1 note", Code_and_Unit_Testing:11, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:30,Effort:15}];
-
+  var data1 = [
+  {Features:"login", Notes: "login to", Code_and_Unit_Testing: 10, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:50,Effort:20},
+  {Features:"feature1",Notes: "feature1 note", Code_and_Unit_Testing:11, Design:10,Testing_and_Debugging:10,BA:10,Total:10,Buffered:30,Effort:15}];
 var $ = function(id) {
         return document.getElementById(id);
     },
@@ -126,6 +127,7 @@ var $ = function(id) {
     save = $('save'),
     autosaveNotification,
     hot;
+    
     function update_last_row(){
         console.log(data1.length);
     }
@@ -135,6 +137,7 @@ var $ = function(id) {
                         "").length > 0;
               }
     function setTotalValue(curRow, curVal,text_id){
+      console.log(curRow+ '   '+curVal+' '+text_id);
                 var sum;
                 var eleCellTotal = document.getElementById(text_id);
                 if(curRow == 0){
