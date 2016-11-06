@@ -49,6 +49,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </script>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/select2-bootstrap.css" rel="stylesheet">
         <style type="text/css">
             .tabs-below > .nav-tabs,
             .tabs-right > .nav-tabs,
@@ -395,9 +396,83 @@ Loading demo dependencies. They are used here only to enhance the examples on th
             </div>
         </div>
 
-    </script>
+
 
     <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+       <script src="js/select2.min.js"></script>
+
+    <script language="JavaScript">
+                                var socket = "";
+                                var roomId = "";
+                                var valz = "";
+                                var sheetsArray = [];
+                                var project_id = "";
+                                $(document).ready(function () {
+                                    
+                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
+                                    var sheet_id1=$("#sheetlist li.active").attr('id');
+                                    socket.on('notifyeveryone', function (msg) {
+                                        //  console.log("event" + JSON.stringify(msg));
+                                        // alert(JSON.stringify(msg));
+                                        //alert(msg.id);
+                                        if(msg.id == sheet_id1){
+                                            notifyMe(msg);    
+                                        }
+                                        
+
+                                        recieve = false;
+                                    });
+
+                                    function notifyMe(data) {// alert(1);
+                                        var res = data; 
+                                        console.log(JSON.stringify(res));
+                                        $.each(res.user, function (k, v) {
+
+                                            row = v[0];
+                                            col = v[1];
+                                            valz = v[3];
+                                            console.log(row + '--' + col);
+                                            /*    $('#example1 td').each(function(key,val) { 
+                                             var index=((row)*9)+(col); //console.log(key+'-gg-'+index);
+                                             if(key==index){ //alert(2);
+                                             
+                                             // $(this).css('border', '1px solid red');
+                                             }
+                                             
+                                             
+                                             });*/
+                                            if (valz) {
+                                                hot.setDataAtCell(row, col, valz);
+                                            }
+
+
+
+                                        });
+                                        $.each(res.user, function (k, v) {
+                                            console.log(k + '--' + v);
+                                            if (k == "row") {
+                                                row = v;
+                                            } else if (k == 'col') {
+                                                col = v;
+                                            }
+                                            $('#example1 td').each(function (key, val) {
+                                                var index = ((row) * 9) + (col); //console.log(key+'-gg-'+index);
+                                                if (key == index) {
+                                                
+
+                                                    $(this).css('border', '1px solid red');
+                                                } else {
+                                                    $(this).css('border-color', '#E6E6E6');
+                                                }
+                                            });});
+                                    }});
+                                                </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script language="JavaScript">
@@ -515,21 +590,90 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         });
     }
     function getProjectDetails(project_id) {
-                                                    $.ajax({
-                                                        url: "actions.php",
-                                                        type: 'post',
-                                                        data: 'project_id=' + project_id + '&action=get_project_details',
-                                                        success: function (result) {
-                                                            if (result) {
-                                                                var resultData = $.parseJSON(result);
-                                                                var project_name = resultData['project_name'];
-                                                                $("#project_name").val(project_name);
-                                                            }
+
+        $.ajax({
+            url: "actions.php",
+            type: 'post',
+            data: 'project_id=' + project_id + '&action=get_project_details',
+            success: function (result) {
+                if (result) {
+                    var resultData = $.parseJSON(result);
+                    var project_name = resultData['project_name'];
+                    $("#project_name").val(project_name);
+                }
 
 
-                                                        }
-                                                    });
-                                                }
+            }
+        });
+    }
+
+
+
+
+    function createNewSheet(){
+      $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'project_id='+project_id+'&action=new_sheet',
+              success: function (result) {
+                if(result){
+                  var resultData = $.parseJSON(result);
+                  var sheet_name = resultData['project_name']; 
+                  $("#sheet_name").val(sheet_name);
+                }
+                
+
+              }
+      });
+    }
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    }
+    
+    function sharewith()
+    {
+        $.post("share.php",
+    {
+        shares: $('#shares').val(),
+        sheet_id: getUrlParameter('project_id')
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+    }
+
     </script>
+    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share with others</h4>
+      </div>
+      <div class="modal-body">
+          <input type="text" name="shares" id="shares" placeholder="Enter emails separated by comma" style="width: 100%;" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="shares" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn" id="shares" data-dismiss="modal" onclick="sharewith()">Submit</button>
+      </div>
+    </div>
+    </div>
+    </div>
+
 </body>
 </html>
