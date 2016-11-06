@@ -45,7 +45,7 @@ function getSheets($data){
 function saveSheet($data){
 	$sheet_id 		= $data['sheet_id'];
 	$sheetData 		= $data['data'];
-	$sheetData		= json_decode($sheetData);
+	//$sheetData		= json_decode($sheetData);	
 	$sheetDataText  = $data['data_text'];
 	$sheetDataText  = json_decode($sheetDataText);
 	$created_by		= $_SESSION['google_data']['email'];
@@ -54,7 +54,7 @@ function saveSheet($data){
 	$temp			= [];
 	$dataArray		= [];
 	$dataTextArray  = [];
-	foreach($sheetData as $item){
+	/*foreach($sheetData as $item){
 
 		$temp['Features'] 				= $item[0];
 		$temp['Notes']	  				= $item[1];
@@ -67,9 +67,9 @@ function saveSheet($data){
 		$temp['Effort']   				= $item[8];
 
 		$dataArray[]					= $temp;
-	}
+	}*/
 	
-	foreach($sheetDataText as $item){
+	foreach($sheetDataText as $key => $item){
 
 		$temp['Features'] 				= $item[0];
 		$temp['Notes']	  				= $item[1];
@@ -87,17 +87,18 @@ function saveSheet($data){
 	$dataArray 		= json_encode($dataArray);
 	$dataTextArray  = json_encode($dataTextArray);
 
-
+	//$dataArray = $data['data'];
+	//$dataTextArray = $data['data_text'];
 	//$deleteSql    = "DELETE FROM fingent_project_sheet_data WHERE sheet_id = $sheet_id";
 
 	$selectSql  = "SELECT id FROM fingent_project_sheet_data WHERE sheet_id = $sheet_id";
 	$query      = mysql_query($selectSql);
 	if(mysql_num_rows($query) > 0){
-		$updateSql  = "UPDATE fingent_project_sheet_data SET data = '$dataArray',data_text= '$dataTextArray',updated_by = '$created_by',updated_on = NOW() WHERE sheet_id = $sheet_id";
+		$updateSql  = "UPDATE fingent_project_sheet_data SET data = '$sheetData',data_text= '$dataTextArray',updated_by = '$created_by',updated_on = NOW() WHERE sheet_id = $sheet_id";
 		mysql_query($updateSql);
 
 	}else{
-		$insertSql 	= "INSERT INTO fingent_project_sheet_data (sheet_id,data,data_text,created_by,created_on) VALUES('$sheet_id','$dataArray','$dataTextArray','$created_by',NOW())";
+		$insertSql 	= "INSERT INTO fingent_project_sheet_data (sheet_id,data,data_text,created_by,created_on) VALUES('$sheet_id','$sheetData','$dataTextArray','$created_by',NOW())";
 		mysql_query($insertSql);	
 	}
 	if(mysql_affected_rows() > 0){
@@ -119,12 +120,12 @@ function getSheetData($data,$type){
 	if(mysql_num_rows($query) > 0){
 		$result = mysql_fetch_assoc($query);
 		if($type == "edit"){
-			$sheetDatas   = json_decode($result['data'],true);
+			/*$sheetDatas   = json_decode($result['data'],true);
 			$sheetDataArray = [];
 			foreach($sheetDatas as $sheetData){		
 				$sheetDataArray[] = array_values($sheetData);
-			}
-			$returnArray['datas'] 	= $sheetDataArray;
+			}*/
+			$returnArray['datas'] 	= $result['data'];
 			$returnArray['sheet_name'] = $result['sheet_name']; 
 			echo json_encode($returnArray);exit;
 		}else{

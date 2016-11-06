@@ -180,7 +180,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                     </input>
                                 </div>
                             </div>
-                             <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
+                             <!--<script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                             <script data-jsfiddle="example1">
 
@@ -348,7 +348,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         var sheet_id=$("#sheetlist li.active").attr('id');
                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
                                             if (recieve) {// alert(change);
-                                                socket.emit('comment added', {usertext: change,sheetid : sheet_id});
+                                                //socket.emit('comment added', {usertext: change,sheetid : sheet_id});
                                             }
                                          /*   //exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                                             autosaveNotification = setTimeout(function () {
@@ -370,7 +370,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         console.log(JSON.stringify({data: change}));
                                         var sheet_id=$("#sheetlist li.active").attr('id');
                                         // alert($("#sheetlist li.active").attr('id'));
-                                        socket.emit('comment added', {usertext: change,sheetid : sheet_id});
+                                        //socket.emit('comment added', {usertext: change,sheetid : sheet_id});
                                         recieve = true;
                                     },
                                     beforeChange: function (changes) {
@@ -457,7 +457,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 var project_id = "";
                                 $(document).ready(function () {
 
-                                    socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
+                                    /*socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
                                     var sheet_id1=$("#sheetlist li.active").attr('id');
                                     socket.on('notifyeveryone', function (msg) {
                                         //  console.log("event" + JSON.stringify(msg));
@@ -469,7 +469,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         
 
                                         recieve = false;
-                                    });
+                                    });*/
 
                                     function notifyMe(data) {// alert(1);
                                         var res = data; 
