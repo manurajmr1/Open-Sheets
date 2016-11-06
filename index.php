@@ -172,7 +172,10 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                             <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                             <script data-jsfiddle="example1">
-                                var flag = true;var data1 ='';var g='';var sheet_id = '';
+                                var flag = true;var data1 ='';var g='';var sheet_id = '';var recieve = true;
+                                 var row = "";
+                                                var col = "";
+
                                                 $(document).ready(function () {
                                                     sheet_id = $("#sheetlist li.active").attr('id');
                                                     var sheetval = '';
@@ -286,10 +289,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                                 ];
     
-                                                var recieve = true;
-                                                var row = "";
-                                                var col = "";
-
+                                                
+                                               
                                                 // function load(){
 
                                                      var $ = function (id) {
@@ -355,8 +356,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                         }
                                                         clearTimeout(autosaveNotification);
                                                         
-                                                        ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
-                                                            if (recieve) {// alert(change);
+                                                        ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) { alert(recieve);
+                                                            if (recieve) { alert(change);
                                                                 socket.emit('comment added', {usertext: change, sheetid: sheet_id});
                                                             }
                                                             /*   //exampleConsole.innerText = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
