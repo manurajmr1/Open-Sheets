@@ -109,6 +109,31 @@ function ajax(url, method, params, callback) {
     return code;
   }
 
+/*  function bindDumpButton() {
+
+    Handsontable.Dom.addEvent(document.body, 'click', function (e) {
+
+      var element = e.target || e.srcElement;
+
+      if (element.nodeName == "BUTTON" && element.name == 'dump') {
+        var name = element.getAttribute('data-dump');
+        var instance = element.getAttribute('data-instance');alert(instance);
+        var hot = window[instance];
+        
+        var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
+        $.ajax({
+              url: "actions.php",
+              type: 'post',
+              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet' ,
+              success: function (result) {
+
+              }
+        });
+      }
+    });
+  }
+*/
+
   function bindDumpButton() {
 
     Handsontable.Dom.addEvent(document.body, 'click', function (e) {
@@ -119,12 +144,32 @@ function ajax(url, method, params, callback) {
         var name = element.getAttribute('data-dump');
         var instance = element.getAttribute('data-instance');
         var hot = window[instance];
-        
+        var array=['A','B','C','D','E','F','G','H','I'];
+          var data_sample=JSON.stringify(hot.getData()); console.log('data of '+ data_sample);
+          var json_array=[];var jarr=[];
+          $.each(hot.getData(), function (k, v) { 
+           var append_data=[];
+           if(k>0){
+
+               $.each(array, function (i,j) { 
+           
+                  var data = hot.plugin.helper.cellValue (j+''+k); // console.log('data of ' +  data);   
+                 //    append_data=append_data+','+data;
+                    append_data.push(data);
+                });
+
+                json_array.push(append_data);//console.log('data of ' +  json_array);   
+           }
+           
+             
+         }); console.log(JSON.stringify(json_array));//jarr.push(json_array); console.log(JSON.stringify(jarr));
+          var jdata=JSON.stringify(json_array);
+        var data = hot.plugin.helper.cellValue ('D1'); //  console.log('data of ' +  data);   
         var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
         $.ajax({
-              url: "save_sheet.php",
+              url: "actions.php",
               type: 'post',
-              data: 'sheet_id=1&data='+data_sample ,
+              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet&data_text='+jdata ,
               success: function (result) {
 
               }

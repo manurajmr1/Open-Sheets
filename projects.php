@@ -1,10 +1,11 @@
 <?php 
 include('config.php');
-
+include('validate_token.php');
 date_default_timezone_set("Asia/Kolkata");
 $today           = date('Y-m-d');
-$loggedUserEmail = "chinchu.kurian@fingent.com";
-$sql    		 = "SELECT * FROM fingent_projects ORDER BY created_on DESC"; 
+$loggedUserEmail = $_SESSION['google_data']['email'];
+$sql    		 = "SELECT fp.id,fp.project_name,fp.created_by,fp.created_on FROM fingent_projects fp LEFT JOIN fingent_project_sheet_shared_users fpss ON fp.id = fpss.project_id 
+					WHERE fp.created_by = '$loggedUserEmail' OR fpss.shared_email = '$loggedUserEmail' ORDER BY fp.created_on DESC"; 
 $query 		     = mysql_query( $sql, $conn );
 $projects			 = [];
 while($row = mysql_fetch_assoc($query)){
@@ -30,7 +31,9 @@ while($row = mysql_fetch_assoc($query)){
 
 	<link rel="stylesheet" href="css/custom/demo.css">
 	<link rel="stylesheet" href="css/custom/header-basic.css">
+	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	.projects-div {
 		border:1px solid #CDCDCD;
@@ -43,7 +46,15 @@ while($row = mysql_fetch_assoc($query)){
 	  font-weight: bold;
 	  color: #394242;
 	}
-
+	.header-title{
+		color:white !important;
+		font-size:20px !important;
+		float:left;
+	}
+	.email-title{
+		color:white;
+		float:right !important;
+	}
 	</style>
 
 </head>
@@ -52,21 +63,27 @@ while($row = mysql_fetch_assoc($query)){
 
 		<header class="header-basic">
 
-			<div class="header-limiter">
+			<!-- <div class="header-limiter">
 				<nav>
-					<a href="#">Fingent Sheets</a>					
+					<a href="#" style="float:left">Fingent Sheets</a>					
 				</nav>
-			</div>
+			</div> -->
+			<a class="header-title" href="projects.php">Fingent Sheets</a>
+			<span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
 		</header>
 
 		<!-- The content of your page would go here. -->
-		<div style="border:1px solid #CDCDCD;margin:50px;padding:5px;">
+		<div class="" style="float:right;margin-right: 85px;margin-top: 5px;"> 
+			<a class="btn btn-primary" href="actions.php?action=new_project">New Project</a>
+		</div>
+		<div style="margin:50px;padding:5px;">
 			<?php if(count($projects) > 0){?>
 				<?php if(isset($projects['today'])){?>
 					<span style="margin-left:30px;"><b>Today</b></span>
 					<?php foreach($projects['today'] as $project){?>
 					<div class="projects-div">
-					<a href="project_sheets.php" class="projects"><?php echo $project['project_name'];?></a>
+					<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+					<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
 					</div>
 					<?php }?>
 				<?php }?>
@@ -76,7 +93,8 @@ while($row = mysql_fetch_assoc($query)){
 					<?php }?>
 					<?php foreach($projects['earlier'] as $project){?>
 					<div class="projects-div">
-					<a href="project_sheets.php" class="projects"><?php echo $project['project_name'];?></a>
+					<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+					<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
 					</div>
 					<?php }?>		
 
