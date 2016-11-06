@@ -34,7 +34,7 @@ Loading Handsontable (full distribution that includes all dependencies apart fro
         <!--
 Loading demo dependencies. They are used here only to enhance the examples on this page
         -->
-        <link href="css/samples.css?20140331" media="screen" rel="stylesheet">
+       <!--  <link href="css/samples.css?20140331" media="screen" rel="stylesheet"> -->
         <script data-jsfiddle="common" src="js/samples.js">
         </script>
         <script src="js/highlight/highlight.pack.js">
@@ -93,7 +93,21 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                 border-color: transparent #ddd #ddd #ddd;
                 font-weight: bold;
             }
+            .header-title{
+               color:white !important;
+               font-size:20px !important;
+               float:left;
+           }
+           .email-title{
+               color:white;
+               float:right !important;
+           }
+           .usertext{
+               padding:5px;
+               float:left
+           }
 
+           input {height:30px}
         </style>
 
     </head>
@@ -120,6 +134,39 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
+                                    <div style="overflow: auto;padding:5px;">
+                                       <div class="usertext ">
+                                           Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
+                                           Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">
+                                       </div>
+
+                                       <p style="display:none;">
+
+                                               <div style="float:right">
+                                                   <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                                    <input type="button" value="Export" class="btn-info btn-md"  onclick="export_sheet();">
+                                               </div></div>
+
+                                          
+                                   </p>
+                                   <!-- <input id="formula" name="formula" type="text" value="">
+                                   <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
+                                   <div class="tabbable tabs-below" >
+                                       <div class="tab-content" >  
+                                           <div id="example1" style="height:750px;widht:100%;">
+                                           </div>
+                                       </div> 
+                                        <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
+                                           save
+                                       </button>
+                                       <ul class="nav nav-tabs" id="sheetlist">
+                                           <!-- <li><a href="" data-toggle="tab">One</a></li>
+                                           <li><a href="" data-toggle="tab">Two</a></li>
+                                           <li><a href="" data-toggle="tab">Twee</a></li> -->
+                                       </ul>                                         
+                                   </div> 
+                                  
+                                   </input>
                                       <div class="usertext ">
                                             Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
                                             Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">

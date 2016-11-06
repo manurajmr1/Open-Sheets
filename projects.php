@@ -82,7 +82,8 @@ while($row = mysql_fetch_assoc($query)){
 					<span style="margin-left:30px;"><b>Today</b></span>
 					<?php foreach($projects['today'] as $project){?>
 					<div class="projects-div">
-					<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+					<!-- <a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a> -->
+					<a href="index.php?project_id=1" class="projects"><i class="fa fa-bars"></i> LMS Project</a>
 					<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
 					</div>
 					<?php }?>
@@ -93,7 +94,7 @@ while($row = mysql_fetch_assoc($query)){
 					<?php }?>
 					<?php foreach($projects['earlier'] as $project){?>
 					<div class="projects-div">
-					<a href="index.php?project_id=<?php echo $project['id'];?>" class="projects"><i class="fa fa-bars"></i> <?php echo $project['project_name'];?></a>
+					<a href="index.php?project_id=1" class="projects"><i class="fa fa-bars"></i> LMS Project</a>
 					<div style="float:right;"><?php echo date("Y-m-d",strtotime($project['created_on']));?></div>		
 					</div>
 					<?php }?>		

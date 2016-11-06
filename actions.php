@@ -140,7 +140,7 @@ function saveProjectName($data){
 	$project_id   = $data['project_id'];
 	$project_name = $data['project_name'];
 
-	$sql = "UPDATE fingent_projects SET project_name = $project_name WHERE project_id = $project_id";
+	$sql = "UPDATE fingent_projects SET project_name = $project_name WHERE id = $project_id";
 	mysql_query($sql);
 	echo "success";exit;
 
