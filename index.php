@@ -142,7 +142,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         <div style="float:right">
                                             <input type="button" value="Share" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
-                                            <input type="button" value="Export" class="btn-info btn-md"  window.location.href="<?php echo $exportUrl; ?>">
+                                            <input type="button" value="Export" class="btn-info btn-md"  onclick="export();">
                                         </div></div>
 
                                     
@@ -653,6 +653,11 @@ Loading demo dependencies. They are used here only to enhance the examples on th
     function(data, status){
         alert("Data: " + data + "\nStatus: " + status);
     });
+    }
+
+    function export(){
+      var sheet_id = $("#sheetlist li.active").attr('id');
+      window.location = "http://localhost:1111/create_excel/1";
     }
 
     </script>
