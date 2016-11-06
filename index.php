@@ -121,7 +121,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </nav>
       </div> -->
       <a class="header-title">Fingent Sheets</a>
-      <span class="email-title" >chinchu.kurian@fingent.com | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
+      <span class="email-title" ><?php echo $_SESSION['google_data']['email'];?> | <a href="logout.php" style="color:white;text-decoration:none;">Logout</a></span>
     </header>
         <div class="wrapper">
             <div class="wrapper-row">
