@@ -49,6 +49,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         </script>
 
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/select2-bootstrap.css" rel="stylesheet">
         <style type="text/css">
             .tabs-below > .nav-tabs,
             .tabs-right > .nav-tabs,
@@ -448,6 +449,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
+       <script src="js/select2.min.js"></script>
 
     <script language="JavaScript">
                                 var socket = "";
@@ -456,7 +458,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 var sheetsArray = [];
                                 var project_id = "";
                                 $(document).ready(function () {
-
+                                    
                                     socket = io.connect('http://fts-dsk-062.ftsindia.in:8080');
                                     var sheet_id1=$("#sheetlist li.active").attr('id');
                                     socket.on('notifyeveryone', function (msg) {
@@ -593,6 +595,33 @@ Loading demo dependencies. They are used here only to enhance the examples on th
               }
       });
     }
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    }
+    
+    function sharewith()
+    {
+        $.post("share.php",
+    {
+        shares: $('#shares').val(),
+        sheet_id: getUrlParameter('project_id')
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+    }
 
     </script>
     <div id="myModal" class="modal fade" role="dialog">
@@ -605,10 +634,11 @@ Loading demo dependencies. They are used here only to enhance the examples on th
         <h4 class="modal-title">Share with others</h4>
       </div>
       <div class="modal-body">
-          <input type="text" name="shares" data-role="tagsinput" />
+          <input type="text" name="shares" id="shares" data-role="tagsinput" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" id="shares" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn" id="shares" data-dismiss="modal" onclick="sharewith()">Submit</button>
       </div>
     </div>
 
