@@ -291,7 +291,8 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     ["Total", "", 0, "=SUM(C2:C51)", "=SUM(D2:D51)", "=SUM(E1:E51)", "=SUM(F1:F51)", "=SUM(G1:G51)", ""]
 
                                                 ];
-
+                                                var total_row = data1.length;
+                                                var remove_row = '';
                                                 var recieve = true;
                                                 var row = "";
                                                 var col = "";
@@ -372,11 +373,11 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                         });
                                                     },
                                                     afterCreateRow: function (index, amount) {
-                                                        update_last_row();
+                                                        total_row++;
                                                         // console.log(index+' '+amount);
 
                                                     }, afterRemoveRow: function (index, amount) {
-                                                        update_last_row();
+                                                        total_row--;
                                                     }, beforeKeyDown: function (changes) {
                                                         //  alert(2);
 
