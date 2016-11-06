@@ -142,21 +142,24 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                         <p style="display:none;">
 
-                                                <div style="float:right">
-                                                    <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
-                                                     <input type="button" value="Export" class="btn-info btn-md"  onclick="export_sheet();">
-                                                </div></div>
+                                        <div style="float:right">
+                                            <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                            <input type="button" value="Export" class="btn-info btn-md"  onclick="export_sheet();">
+                                            <input type="button" value="Overview" class="btn-info btn-md" data-toggle="modal" data-target="#overview">
+                                        </div></div>
 
-                                           
+
                                     </p>
-                                    <!-- <input id="formula" name="formula" type="text" value="">
-                                    <pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
+
+
+<!-- <input id="formula" name="formula" type="text" value="">
+<pre class="console" id="example1console">Click "Load" to load data from server</pre> -->
                                     <div class="tabbable tabs-below" >
                                         <div class="tab-content" >  
                                             <div id="example1" style="height:750px;widht:100%;">
                                             </div>
                                         </div> 
-                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
+                                        <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
                                             save
                                         </button>
                                         <ul class="nav nav-tabs" id="sheetlist">
@@ -165,14 +168,17 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                             <li><a href="" data-toggle="tab">Twee</a></li> -->
                                         </ul>                                         
                                     </div> 
-                                   
+
                                     </input>
                                 </div>
                             </div>
                             <script src="http://fts-dsk-062.ftsindia.in:8080/socket.io/socket.io.js"></script>
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                             <script data-jsfiddle="example1">
-                                var flag = true;var data1 ='';var g='';var sheet_id = '';
+                                                var flag = true;
+                                                var data1 = '';
+                                                var g = '';
+                                                var sheet_id = '';
                                                 $(document).ready(function () {
                                                     sheet_id = $("#sheetlist li.active").attr('id');
                                                     var sheetval = '';
@@ -202,35 +208,35 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     });
 
 
-                                            /*        $.ajax({
-                                                        url: "actions.php",
-                                                        type: 'post',
-                                                        async:false,
-                                                        data: 'action=get_sheet_data&sheet_id=' + sheet_id,
-                                                        success: function (result) {  
-                                                            var new_val='';
-                                                            if(result){
-                                                            var val = jQuery.parseJSON(result); console.log("resultyyy=" + val.datas);
-                                                             new_val=val.datas;
-                                                            }
-
-
-                                                          
-                                                            if (new_val) { 
-                                                                var g=new_val; 
-                                                                data1 = new_val;
-                                                                load();
-                                                                flag = false;
-                                                            }else{
-                                                                  
-                                                // load();
-                                                            }
-
-                                                        }
-                                                    });*/
+                                                    /*        $.ajax({
+                                                     url: "actions.php",
+                                                     type: 'post',
+                                                     async:false,
+                                                     data: 'action=get_sheet_data&sheet_id=' + sheet_id,
+                                                     success: function (result) {  
+                                                     var new_val='';
+                                                     if(result){
+                                                     var val = jQuery.parseJSON(result); console.log("resultyyy=" + val.datas);
+                                                     new_val=val.datas;
+                                                     }
+                                                     
+                                                     
+                                                     
+                                                     if (new_val) { 
+                                                     var g=new_val; 
+                                                     data1 = new_val;
+                                                     load();
+                                                     flag = false;
+                                                     }else{
+                                                     
+                                                     // load();
+                                                     }
+                                                     
+                                                     }
+                                                     });*/
                                                 });
 
- data1 = [
+                                                data1 = [
                                                     ['Features', 'Notes', 'Code and Unit Testing', 'Design', 'Testing and Debugging', 'BA', 'Total', 'Buffered', 'Effort'],
                                                     ["", "", 0, "=C2*20/100", "=C2*30/100", "=C2*25/100", "=SUM(C2:F2)", "=SUM(C2:F2)", '=IF(H2>80,"H",(IF(H2>8,"M","L")))'],
                                                     ["", "", 0, "=C3*20/100", "=C3*30/100", "=C3*25/100", "=SUM(C3:F3)", "=SUM(C3:F3)", '=IF(H3>80,"H",(IF(H3>8,"M","L")))'],
@@ -285,14 +291,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     ["Total", "", 0, "=SUM(C2:C51)", "=SUM(D2:D51)", "=SUM(E1:E51)", "=SUM(F1:F51)", "=SUM(G1:G51)", ""]
 
                                                 ];
-    
+
                                                 var recieve = true;
                                                 var row = "";
                                                 var col = "";
 
                                                 // function load(){
 
-                                                     var $ = function (id) {
+                                                var $ = function (id) {
                                                     return document.getElementById(id);
                                                 },
                                                         container = $('example1'),
@@ -303,7 +309,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                         autosaveNotification,
                                                         hot;
                                                 function update_last_row() {
-                                                    
+
                                                     console.log(data1.length);
                                                 }
                                                 function isEmptyRow(instance, row) {
@@ -325,7 +331,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                     startCols: 20,
                                                     rowHeaders: true,
                                                     colHeaders: true,
-                                                    minSpareRows: 1,
+                                                    minSpareRows: 0,
                                                     contextMenu: true,
                                                     manualColumnResize: true,
                                                     manualRowResize: true,
@@ -354,7 +360,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                             return;
                                                         }
                                                         clearTimeout(autosaveNotification);
-                                                        
+
                                                         ajax('json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
                                                             if (recieve) {// alert(change);
                                                                 socket.emit('comment added', {usertext: change, sheetid: sheet_id});
@@ -376,8 +382,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                                     },
                                                     beforeSetRangeEnd: function (change, source) {
-                                                        console.log(JSON.stringify({data: change}));var sheet_id =1;
-                                                       // var sheet_id = $("#sheetlist li.active").attr('id'); alert(sheet_id);
+                                                        console.log(JSON.stringify({data: change}));
+                                                        var sheet_id = 1;
+                                                        // var sheet_id = $("#sheetlist li.active").attr('id'); alert(sheet_id);
                                                         // alert($("#sheetlist li.active").attr('id'));
                                                         socket.emit('comment added', {usertext: change, sheetid: sheet_id});
                                                         recieve = true;
@@ -431,8 +438,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
 
                                                         if (response.result === 'ok') {
                                                             exampleConsole.innerText = 'Data saved';
-                                                        }
-                                                        else {
+                                                        } else {
                                                             exampleConsole.innerText = 'Save error';
                                                         }
                                                     });
@@ -441,15 +447,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 Handsontable.Dom.addEvent(autosave, 'click', function () {
                                                     if (autosave.checked) {
                                                         exampleConsole.innerText = 'Changes will be autosaved';
-                                                    }
-                                                    else {
+                                                    } else {
                                                         exampleConsole.innerText = 'Changes will not be autosaved';
                                                     }
                                                 });
 
                                                 // }
-                                               
-                                               
+
+
                             </script>
                         </div>
                     </div>
@@ -591,90 +596,46 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                 }
 
 
-    
-    var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+                                                var getUrlParameter = function getUrlParameter(sParam) {
+                                                    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                                                            sURLVariables = sPageURL.split('&'),
+                                                            sParameterName,
+                                                            i;
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-    }
-    
-    function sharewith()
-    {
-        $.post("share.php",
-    {
-        shares: $('#shares').val(),
-        sheet_id: getUrlParameter('project_id')
-    },
-    function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
-    });
-    }
+                                                    for (i = 0; i < sURLVariables.length; i++) {
+                                                        sParameterName = sURLVariables[i].split('=');
+
+                                                        if (sParameterName[0] === sParam) {
+                                                            return sParameterName[1] === undefined ? true : sParameterName[1];
+                                                        }
+                                                    }
+                                                }
+
+                                                function sharewith()
+                                                {
+                                                    $.post("share.php",
+                                                            {
+                                                                shares: $('#shares').val(),
+                                                                sheet_id: getUrlParameter('project_id')
+                                                            },
+                                                            function (data, status) {
+                                                                alert("Data: " + data + "\nStatus: " + status);
+                                                            });
+                                                }
 
     </script>
     <style>
         .fade {
-opacity: 2;
--webkit-transition: opacity 0.15s linear;
-transition: opacity 0.15s linear;
-}
-.fade.in {
-opacity: 2;
-}
-        </style>
-    
-    <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+            opacity: 2;
+            -webkit-transition: opacity 0.15s linear;
+            transition: opacity 0.15s linear;
+        }
+        .fade.in {
+            opacity: 2;
+        }
+    </style>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Share with others</h4>
-      </div>
-      <div class="modal-body">
-          <input type="text" name="shares" id="shares" placeholder="Enter emails separated by comma" style="width: 100%;" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="shares" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn" id="shares" data-dismiss="modal" onclick="sharewith()">Submit</button>
-      </div>
-    </div>
-    </div>
-    </div>
-<script>
-
-                                                function createNewSheet() {
-                                                    $.ajax({
-                                                        url: "actions.php",
-                                                        type: 'post',
-                                                        data: 'project_id=' + project_id + '&action=new_sheet',
-                                                        success: function (result) {
-                                                            if (result) {
-                                                                var resultData = $.parseJSON(result);
-                                                                var sheet_name = resultData['project_name'];
-                                                                $("#sheet_name").val(sheet_name);
-                                                            }
-
-
-                                                        }
-                                                    });
-                                                }
-
-                                                function export_sheet(){
-                                                  var sheet_id = $("#sheetlist li.active").attr('id');
-                                                  window.location = "http://localhost:1111/create_excel/"+sheet_id;
-                                                }
-
-    </script>
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -685,7 +646,176 @@ opacity: 2;
                     <h4 class="modal-title">Share with others</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="form-control" id="tokenfield-typeahead" />
+                    <input type="text" name="shares" id="shares" placeholder="Enter emails separated by comma" style="width: 100%;" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="shares" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn" id="shares" data-dismiss="modal" onclick="sharewith()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function createNewSheet() {
+            $.ajax({
+                url: "actions.php",
+                type: 'post',
+                data: 'project_id=' + project_id + '&action=new_sheet',
+                success: function (result) {
+                    if (result) {
+                        var resultData = $.parseJSON(result);
+                        var sheet_name = resultData['project_name'];
+                        $("#sheet_name").val(sheet_name);
+                    }
+
+
+                }
+            });
+        }
+
+        function export_sheet() {
+            var sheet_id = $("#sheetlist li.active").attr('id');
+            window.location = "http://localhost:1111/create_excel/" + sheet_id;
+        }
+
+    </script>
+    <div id="overview" class="modal fade" role="dialog" style="margin-left:-400px;width:800px">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Overview</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="jumbotron" style="float:left;width:100%">
+                        <table style="float:left;width:50%">
+                            <tr>
+                                <th>
+                                    Domain
+                                </th>
+                                <th>
+                                    Estimate
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Code and Unit Testing
+                                </td>
+                                <td class="estimate_value" id="dev_val">
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Design
+                                </td>
+                                <td class="estimate_value" id="design_val">
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Testing and Debugging
+                                </td>
+                                <td class="estimate_value" id="testing_val">
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BA
+                                </td>
+                                <td class="estimate_value" id="ba_val">
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total
+                                </td>
+                                <td class="estimate_value" id="total_val">
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Buffered
+                                </td>
+                                <td class="estimate_value" id="buffer_val">
+                                    0
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="float:right;width:50%">
+                            <tr>
+                                <th>
+                                    Domain
+                                </th>
+                                <th>
+                                    Estimate
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Design
+                                </td>
+                                <td class="estimate_text_td">
+                                    <input type="text"  data-id="3" data-attr="d" class="estimate_text numeric" value="25" id="design_val_text" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Testing and Debugging
+                                </td>
+                                <td class="estimate_text_td" >
+                                    <input type="text"  data-id="4" data-attr="e" class="estimate_text numeric" value="40" id="testing_val_text" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BA
+                                </td>
+                                <td class="estimate_text_td">
+                                    <input type="text"  data-id="5" data-attr="f" class="estimate_text numeric" value ="40" id="ba_val_text" >
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td>
+                                    Total
+                                </td>
+                                <td class="estimate_text_td">
+                                   <input type="text"  data-id="6" data-attr="g" class="estimate_text" id="total_val_text" >
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td>
+                                    Buffered
+                                </td>
+                                <td class="estimate_text_td">
+                                    <input type="text"  data-id="7" data-attr="h" class="estimate_text numeric" value="30" id="buffer_val_text" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    High
+                                </td>
+                                <td class="estimate_text_td">
+                                    <input type="text"  data-id="8" data-attr="i" class="range_text numeric" value="80" id="high_val_text" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Low
+                                </td>
+                                <td class="estimate_text_td">
+                                    <input type="text"  data-id="8" data-attr="i" class="range_text numeric" value="8" id="low_val_text" >
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -694,5 +824,12 @@ opacity: 2;
 
         </div>
     </div>
+    <script>
+        $('#overview').modal('show');
+        $('#overview').modal('hide');
+        $('#modal').modal('show');
+        $('#modal').modal('hide');
+
+    </script>
 </body>
 </html>
