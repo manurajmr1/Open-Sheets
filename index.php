@@ -144,7 +144,7 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                         <p style="display:none;">
 
                                         <div style="float:right">
-                                            <input type="button" value="Share 1" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
+                                            <input type="button" value="Share" class="btn-info btn-md"  data-toggle="modal" data-target="#myModal">
                                         </div></div>
 
                                     <button id="load" name="load">
