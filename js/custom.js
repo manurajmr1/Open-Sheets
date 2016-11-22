@@ -11,7 +11,7 @@
 
      // });
 
-      $('#container').on('blur', '.range_text', function() {
+      $('#overview').on('blur', '.range_text', function() {
       	// =IF($H13>'Overview(Phase1)'!$B$20,"H",(IF($H13>'Overview(Phase1)'!$B$21,"M","L")))
          var id_name = $(this).attr('id');
          var cel_name = $(this).data('attr');
@@ -20,7 +20,7 @@
          // var formula_def = $(this).val();
          update_range();
      });
-      $('#container').on('blur', '.estimate_text', function() {
+      $('#overview').on('blur', '.estimate_text', function() {
          var id_name = $(this).attr('id');
          var cel_name = $(this).data('attr');
          var col_index = $(this).data('id');
@@ -28,7 +28,7 @@
          // var formula_def = $(this).val();
          update_cells(col_index);
      });
-     $('.estimate_text').trigger('blur');
+    // $('.estimate_text').trigger('blur');
  });
 function insert_new_row(index){
 	hot.setDataAtCell(index, 0, '');
@@ -46,9 +46,9 @@ function insert_new_row(index){
  	var high_val = $('#high_val_text').val()!=''?$('#high_val_text').val():0;
  	// =IF($H13>$B$20,"H",(IF($H13>$B$21,"M","L")))
  	// =IF(H4>10,'H',(IF(H4>0'M','L')))
- 	var i=0;
+ 	var i=1;
 		var total_index = total_row - 1;
-		for(i=0;i<total_index;i++){
+		for(i=1;i<=total_index;i++){
 			var range_formula_val ="=IF(H"+parseInt(i+1)+">"+high_val+",'H',(IF(H"+parseInt(i+1)+">"+low_val+",'M','L')))";
 			hot.setDataAtCell(i, 8, range_formula_val);
 		}
@@ -65,9 +65,9 @@ function update_cells(col_index) {
 		formula_def = $('#'+text_id).val()+'%';
 	}
 	if(formula_def!='' && formula_def!='%'){
-		var i=0;
+		var i=1;
 		var total_index = total_row - 1;
-		for(i=0;i<total_index;i++){
+		for(i=1;i<=total_index;i++){
 			var code_cal = hot.getDataAtCell(i, 2);
 			var code_formula = Math.round(((code_cal*formula_def)/100),5);
 			var code_formula_val ="=C"+parseInt(i+1)+"*"+formula_def+"";

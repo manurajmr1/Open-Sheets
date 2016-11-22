@@ -150,10 +150,10 @@ function ajax(url, method, params, callback) {
           $.each(hot.getData(), function (k, v) { 
            var append_data=[];
            if(k>0){
-
+            //console.log("k---"+k);
                $.each(array, function (i,j) { 
            
-                  var data = hot.plugin.helper.cellValue (j+''+k); // console.log('data of ' +  data);   
+                  var data = hot.plugin.helper.cellValue (j+''+k);  console.log('data of ' +  data+'--k--'+k+'--j='+j+'--'+hot.plugin.helper.cellValue ('D44'));   
                  //    append_data=append_data+','+data;
                     append_data.push(data);
                 });
@@ -162,16 +162,40 @@ function ajax(url, method, params, callback) {
            }
            
              
-         }); console.log(JSON.stringify(json_array));//jarr.push(json_array); console.log(JSON.stringify(jarr));
-          var jdata=JSON.stringify(json_array);
+         }); 
+
+           $.each(hot.getData(), function (k, v) { 
+           var new_data=[];
+           if(k>0){
+
+               $.each(array, function (i,j) { 
+           
+         if(j=='A' || j=='B'|| j=='C' ){
+          var data = hot.plugin.helper.cellValue (j+''+k);
+          new_data.push(data);
+         }else{
+           var data ="";
+          new_data.push(data);
+                   }
+                });
+
+                jarr.push(new_data);
+           }
+           
+             
+         });
+        // console.log(JSON.stringify(jarr));//jarr.push(json_array); console.log(JSON.stringify(jarr));
+          var jdata=JSON.stringify(json_array); console.log(jdata);
         var data = hot.plugin.helper.cellValue ('D1'); //  console.log('data of ' +  data);   
-        var data_sample=JSON.stringify(hot.getData()); console.log('data of ' + name, data_sample);
+        var data_sample=JSON.stringify(hot.getData()); //console.log('data of ' + name, data_sample);
+        var new_data=JSON.stringify(jarr);
+        var sheet_id = $("#sheetlist li.active").attr('id');
         $.ajax({
               url: "actions.php",
               type: 'post',
-              data: 'sheet_id=1&data='+data_sample+'&action=save_sheet&data_text='+jdata ,
+              data: 'sheet_id='+sheet_id+'&data='+new_data+'&action=save_sheet&data_text='+jdata ,
               success: function (result) {
-
+                alert('saved');
               }
         });
       }

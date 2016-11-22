@@ -134,10 +134,9 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                         <div class="rowLayout">
                             <div class="descLayout">
                                 <div class="pad" data-jsfiddle="example1">
-                                    
                                       <div class="usertext ">
-                                            Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="" onblur="changeProjectName()">
-                                            Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="">
+                                            Project Name : <input  class="form-control" type="text" name="project_name" id="project_name" value="LMS Project" onblur="changeProjectName()">
+                                            Sheet Name   : <input  type="text" name="sheet_name" id="sheet_name" value="Sheet1">
                                         </div>
                                     <p style="display:none;">
                                         <button id="load" name="load">
@@ -157,21 +156,25 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                                      <input type="button" value="Export" class="btn-info btn-md"  onclick="export_sheet();">
                                                 </div></div>
                                     
-                                    
-                                    <div class="tabbable tabs-below">
+                                    <br></br><br>
+                                    <div class="tabbable tabs-below" >
                                         <!-- <div class="tab-content">  -->
+                                        
                                        <div class="tab-content" >  
                                             <div id="example1" style="height:750px;widht:100%;">
                                             </div>
                                         </div> 
+
                                         <ul class="nav nav-tabs" id="sheetlist">
                                            <!--  <li><a href="" data-toggle="tab">One</a></li>
                                             <li><a href="" data-toggle="tab">Two</a></li>
                                             <li><a href="" data-toggle="tab">Twee</a></li> -->
                                         </ul>
                                         <!-- </div> -->
+
+
                                     </div> 
-                                    <p>
+                                       <p>
                                         <button data-dump="#example1" data-instance="hot" name="dump" title="Prints current data source to Firebug/Chrome Dev Tools">
                                            save
                                         </button>
@@ -185,14 +188,14 @@ Loading demo dependencies. They are used here only to enhance the examples on th
                                 var col = "";
                                 var data1 = [
                                     ['Features', 'Notes', 'Code and Unit Testing', 'Design', 'Testing and Debugging', 'BA', 'Total', 'Buffered', 'Effort'],
-                                    ["", "", 0, "=C2*20/100", "=C2*30/100", "=C2*25/100", "=SUM(C2:F2)", "=SUM(C2:F2)",'=IF(H2>80,"H",(IF(H2>8,"M","L")))'],
-                                    ["", "", 0, "=C3*20/100", "=C3*30/100", "=C3*25/100", "=SUM(C3:F3)", "=SUM(C3:F3)",'=IF(H3>80,"H",(IF(H3>8,"M","L")))'],
-                                    ["", "", 0, "=C4*20/100", "=C4*30/100", "=C4*25/100", "=SUM(C4:F4)", "=SUM(C4:F4)",'=IF(H4>80,"H",(IF(H4>8,"M","L")))'],
-                                    ["", "", 0, "=C5*20/100", "=C5*30/100", "=C5*25/100", "=SUM(C5:F5)", "=SUM(C5:F5)", '=IF(H5>80,"H",(IF(H5>8,"M","L")))'],
-                                    ["", "", 0, "=C6*20/100", "=C6*30/100", "=C6*25/100", "=SUM(C6:F6)", "=SUM(C6:F6)", '=IF(H6>80,"H",(IF(H6>8,"M","L")))'],
-                                    ["", "", 0, "=C7*20/100", "=C7*30/100", "=C7*25/100", "=SUM(C7:F7)", "=SUM(C7:F7)", '=IF(H7>80,"H",(IF(H7>8,"M","L")))'],
-                                    ["", "", 0, "=C8*20/100", "=C8*30/100", "=C8*25/100", "=SUM(C8:F8)", "=SUM(C8:F8)", '=IF(H8>80,"H",(IF(H8>8,"M","L")))'],
-                                    ["", "", 0, "=C9*20/100", "=C9*30/100", "=C9*25/100", "=SUM(C9:F9)", "=SUM(C9:F9)", '=IF(H9>80,"H",(IF(H9>8,"M","L")))'],
+                                    ["Export plans", "- User should be able to export lesson(s) ", 180, "=C2*20/100", "=C2*30/100", "=C2*25/100", "=SUM(C2:F2)", "=SUM(C2:F2)",'=IF(H2>80,"H",(IF(H2>8,"M","L")))'],
+                                    ["Sync with main online server", "- All contents and lessons will be housed in a central server.", 240, "=C3*20/100", "=C3*30/100", "=C3*25/100", "=SUM(C3:F3)", "=SUM(C3:F3)",'=IF(H3>80,"H",(IF(H3>8,"M","L")))'],
+                                    ["Manual Grading for Objective Assessment", "- All contents and lessons will be housed in a central server.", 24, "=C4*20/100", "=C4*30/100", "=C4*25/100", "=SUM(C4:F4)", "=SUM(C4:F4)",'=IF(H4>80,"H",(IF(H4>8,"M","L")))'],
+                                    ["Assessment status", "- All contents and lessons will be housed in a central server.", 10, "=C5*20/100", "=C5*30/100", "=C5*25/100", "=SUM(C5:F5)", "=SUM(C5:F5)", '=IF(H5>80,"H",(IF(H5>8,"M","L")))'],
+                                    ["Rename assessments", "- All contents and lessons will be housed in a central server.", 4, "=C6*20/100", "=C6*30/100", "=C6*25/100", "=SUM(C6:F6)", "=SUM(C6:F6)", '=IF(H6>80,"H",(IF(H6>8,"M","L")))'],
+                                    ["Add Academic Cooridnator role", "- All contents and lessons will be housed in a central server.", 70,"=C7*20/100", "=C7*30/100", "=C7*25/100", "=SUM(C7:F7)", "=SUM(C7:F7)", '=IF(H7>80,"H",(IF(H7>8,"M","L")))'],
+                                    ["Rename Local admin and Teacher", "- All contents and lessons will be housed in a central server.", 8, "=C8*20/100", "=C8*30/100", "=C8*25/100", "=SUM(C8:F8)", "=SUM(C8:F8)", '=IF(H8>80,"H",(IF(H8>8,"M","L")))'],
+                                    ["Media player", "- User would like to play the video content that is stored locally in a server.- The media player will let the user play/pause/seek a video that's available in the resource library or lesson.", 40, "=C9*20/100", "=C9*30/100", "=C9*25/100", "=SUM(C9:F9)", "=SUM(C9:F9)", '=IF(H9>80,"H",(IF(H9>8,"M","L")))'],
                                     ["", "", 0, "=C10*20/100", "=C10*30/100", "=C10*25/100", "=SUM(C10:F10)", "=SUM(C10:F10)", '=IF(H10>80,"H",(IF(H10>8,"M","L")))'],
                                    ["", "", 0, "=C11*20/100", "=C11*30/100", "=C11*25/100", "=SUM(C11:F11)", "=SUM(C11:F11)", '=IF(H11>80,"H",(IF(H11>8,"M","L")))'],
                                     ["", "", 0, "=C12*20/100", "=C12*30/100", "=C12*25/100", "=SUM(C12:F12)", "=SUM(C12:F12)", '=IF(H12>80,"H",(IF(H12>8,"M","L")))'],
